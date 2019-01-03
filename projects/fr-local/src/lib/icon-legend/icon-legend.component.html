@@ -1,0 +1,31 @@
+<h2>Icon Legend</h2>
+
+<fr-icon-bar-legend [caption]="'Toolbar'" [bar]="toolbarIcons"></fr-icon-bar-legend>
+<fr-icon-bar-legend [caption]="'Iconbar'" [bar]="iconbarIcons"></fr-icon-bar-legend>
+<fr-icon-bar-legend [caption]="'Explorer bar'" [bar]="explorerbarIcons"></fr-icon-bar-legend>
+<fr-icon-bar-legend [caption]="'Checkbar'" [bar]="checkbarIcons"></fr-icon-bar-legend>
+<fr-icon-bar-legend [caption]="'Editbar'" [bar]="editbarIcons"></fr-icon-bar-legend>
+<fr-icon-bar-legend [caption]="'Msg edit 1'" [bar]="msgEdit1Icons"></fr-icon-bar-legend>
+<fr-icon-bar-legend [caption]="'Msg edit 2'" [bar]="msgEdit2Icons"></fr-icon-bar-legend>
+<fr-icon-bar-legend [caption]="'Prepare bar'" [bar]="preparebarIcons"></fr-icon-bar-legend>
+<fr-icon-bar-legend [caption]="'Text Area'" [bar]="textAreaIcons"></fr-icon-bar-legend>
+<fr-icon-bar-legend [caption]="'Pre Text'" [bar]="preTextIcons"></fr-icon-bar-legend>
+<fr-icon-bar-legend [caption]="'Entries'" [bar]="entriesIcons"></fr-icon-bar-legend>
+<fr-icon-bar-legend [caption]="'Event'" [bar]="eventIcons"></fr-icon-bar-legend>
+<fr-icon-bar-legend [caption]="'Race'" [bar]="raceIcons"></fr-icon-bar-legend>
+
+<ng-container *ngIf="PoolVisible">
+
+<h3>Icon Pool</h3>
+
+<ul>
+  <li *ngFor="let i of pool">
+    <button mat-icon-button>
+      <mat-icon>{{i}}</mat-icon>
+    </button>
+    <span>{{i}}</span>
+  </li>
+</ul>
+</ng-container>
+
+<button mat-raised-button (click)="togglePool()">Pool</button>

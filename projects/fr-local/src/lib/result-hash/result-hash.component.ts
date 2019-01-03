@@ -1,0 +1,150 @@
+import { Component, OnInit } from '@angular/core';
+import { TStringList } from 'fleetrace';
+import { TEventRowCollectionItem } from 'fleetrace';
+import { TBOManager } from 'fleetrace';
+import { TableToken } from 'fleetrace';
+import { TUtils } from 'fleetrace';
+
+@Component({
+  selector: 'fr-result-hash',
+  templateUrl: './result-hash.component.html',
+  styleUrls: ['./result-hash.component.scss']
+})
+export class ResultHashComponent implements OnInit {
+
+  CL: TStringList = new TStringList();
+  CompareMsg: string = "";
+  ComparedOK: boolean = true;
+
+  Info: string = "info";
+  TestOutput: string;
+
+  constructor(public BOManager: TBOManager) { }
+
+  ngOnInit() {
+  }
+
+  show() {
+    // this.CL.Clear();
+    // this.TestOutput = this.getMsgList(this.CL);
+
+    this.CL.Clear();
+
+    this.writeCompareList(this.CL);
+
+    this.Info = "show called.";
+    this.TestOutput = this.CL.Text;
+
+    this.CL.Clear();
+  }
+
+  check() {
+    this.checkMsgList(this.CL);
+    this.Info = this.CompareMsg;
+    this.ComparedOK ? this.TestOutput = "" : this.TestOutput = this.CL.Text;
+    this.CL.Clear();
+  }
+
+  clear() {
+    this.Info = 'info';
+    this.TestOutput = "";
+  }
+  
+  getMsgList(SL: TStringList): string {
+    let cl = this.BOManager.BO.EventNode.Collection;
+    let cr: TEventRowCollectionItem;
+    var v0: number;
+    var v1: number;
+    for (var i = 0; i < cl.Count; i++) {
+      cr = cl.Items[i];
+      if (cr.PLZ >= 0) {
+        cr = cl.Items[cr.PLZ];
+        v0 = cr.Bib;
+        v1 = Math.round(cr.Race[0].CTime);
+      }
+      else {
+        //should never come into here
+        v0 = i;
+        v1 = 0;
+      }
+      SL.Add(`${v0}=${v1}`); //Format('%.3d=%.5d', [v0, v1]);
+    }
+    return SL.Text;
+  }
+
+  writeCompareList(ML: TStringList) {
+    ML.Add(TableToken.CompareListStart);
+    this.getMsgList(ML);
+    ML.Add(TableToken.CompareListEnd);
+  }
+
+  checkMsgList(SL: TStringList): boolean {
+    var ML: TStringList;
+    var b1: number;
+    var b2: number;
+    var p1: number;
+    var p2: number;
+
+    SL.Clear;
+    this.getMsgList(SL);
+
+    var result = true;
+    this.CompareMsg = 'Check OK';
+    this.ComparedOK = true;
+    ML = this.BOManager.BO.ExcelImporter.CompareList;
+    if (ML.Count === 0) {
+      result = false;
+      this.CompareMsg = 'Original CompareList (ML) is empty.';
+      return result;
+    }
+    else if (ML.Count != this.BOManager.BO.BOParams.StartlistCount) {
+      result = false;
+      this.CompareMsg = 'CompareList.Count does not match StartList.Count.';
+      return result;
+    }
+    else if (ML.Count == SL.Count) {
+      for (var i = 0; i < SL.Count; i++) {
+        b1 = TUtils.StrToIntDef(SL.KeyFromIndex(i), -1);
+        b2 = TUtils.StrToIntDef(ML.KeyFromIndex(i), -1);
+        if (b1 == b2) {
+          p1 = TUtils.StrToIntDef(SL.ValueFromIndex(i), -1);
+          p2 = TUtils.StrToIntDef(ML.ValueFromIndex(i), -1);
+          if (p1 != p2) {
+            result = false;
+            SL.Update(i, `${i}: ${ML.Items(i)} : ${SL.Items(i)}`);
+            this.CompareMsg = `Points mismatch at Index ${i}`;
+            this.ComparedOK = false;
+            //break;
+          }
+        }
+        else {
+          result = false;
+          SL.Update(i, `${i}: ${ML.Items(i)} : ${SL.Items(i)}`);
+          this.CompareMsg = `Bib mismatch at Index ${i}`;
+          this.ComparedOK = false;
+          //break;
+        }
+      }
+    }
+    return result;
+  }
+
+  getMemoString(): string {
+    var b: boolean;
+    let SL = new TStringList();
+    this.CL.Clear;
+    this.getMsgList(this.CL);
+    SL.Add('');
+    b = this.checkMsgList(this.CL);
+    if (b)
+      SL.Add('CompareList-Check ok');
+    else
+      SL.Add('CompareList-Check failed - ' + this.CompareMsg);
+
+    for (var i = 0; i < this.CL.Count; i++)
+      SL.Add(this.CL.Items(i));
+
+    return SL.Text;
+  }
+
+}
