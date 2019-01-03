@@ -96,7 +96,7 @@ export class AppComponent implements OnInit {
   InputVisible = true;
   BibVisible = false;
   EntriesVisible = false;
-  RaceVisible = false;
+  RaceVisible = true;
   EventVisible = false;
 
   TextAreaVisible = false;

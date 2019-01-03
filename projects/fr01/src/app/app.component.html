@@ -65,7 +65,7 @@
             <h2>Panel</h2>
 
             <div class="button-line">
-                <button mat-stroked-button color="primary" (click)="toggleButtonPanel()">Icons</button>
+                <button mat-stroked-button color="primary" [disabled]="true" (click)="toggleButtonPanel()">Icons</button>
                 <button mat-stroked-button color="primary" (click)="toggleRows()">Rows</button>
                 <button mat-stroked-button color="primary" (click)="initCurrent()">Next</button>
             </div>
