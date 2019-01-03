@@ -1,0 +1,48 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "module": "es2015",
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es5",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2018",
+      "dom"
+    ],
+    "paths": {
+      "scoring": [
+        "dist/scoring"
+      ],
+      "scoring/*": [
+        "dist/scoring/*"
+      ],
+      "fleetrace": [
+        "dist/fleetrace"
+      ],
+      "fleetrace/*": [
+        "dist/fleetrace/*"
+      ],
+      "fr-local": [
+        "dist/fr-local"
+      ],
+      "fr-local/*": [
+        "dist/fr-local/*"
+      ],
+      "fr-remote": [
+        "dist/fr-remote"
+      ],
+      "fr-remote/*": [
+        "dist/fr-remote/*"
+      ]
+    }
+  }
+}

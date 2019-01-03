@@ -1,0 +1,849 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "scoring": {
+      "root": "projects/scoring",
+      "sourceRoot": "projects/scoring/src",
+      "projectType": "library",
+      "prefix": "scoring",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/scoring/tsconfig.lib.json",
+            "project": "projects/scoring/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/scoring/src/test.ts",
+            "tsConfig": "projects/scoring/tsconfig.spec.json",
+            "karmaConfig": "projects/scoring/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/scoring/tsconfig.lib.json",
+              "projects/scoring/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "fleetrace": {
+      "root": "projects/fleetrace",
+      "sourceRoot": "projects/fleetrace/src",
+      "projectType": "library",
+      "prefix": "fr",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/fleetrace/tsconfig.lib.json",
+            "project": "projects/fleetrace/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/fleetrace/src/test.ts",
+            "tsConfig": "projects/fleetrace/tsconfig.spec.json",
+            "karmaConfig": "projects/fleetrace/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/fleetrace/tsconfig.lib.json",
+              "projects/fleetrace/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "fr07": {
+      "root": "projects/fr07/",
+      "sourceRoot": "projects/fr07/src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/fr07",
+            "index": "projects/fr07/src/index.html",
+            "main": "projects/fr07/src/main.ts",
+            "polyfills": "projects/fr07/src/polyfills.ts",
+            "tsConfig": "projects/fr07/tsconfig.app.json",
+            "assets": [
+              "projects/fr07/src/favicon.ico",
+              "projects/fr07/src/assets"
+            ],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "projects/fr07/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/fr07/src/environments/environment.ts",
+                  "with": "projects/fr07/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "fr07:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "fr07:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "fr07:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/fr07/src/test.ts",
+            "polyfills": "projects/fr07/src/polyfills.ts",
+            "tsConfig": "projects/fr07/tsconfig.spec.json",
+            "karmaConfig": "projects/fr07/karma.conf.js",
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "projects/fr07/src/styles.css"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/fr07/src/favicon.ico",
+              "projects/fr07/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/fr07/tsconfig.app.json",
+              "projects/fr07/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "fr05": {
+      "root": "projects/fr05/",
+      "sourceRoot": "projects/fr05/src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/fr05",
+            "index": "projects/fr05/src/index.html",
+            "main": "projects/fr05/src/main.ts",
+            "polyfills": "projects/fr05/src/polyfills.ts",
+            "tsConfig": "projects/fr05/tsconfig.app.json",
+            "assets": [
+              "projects/fr05/src/favicon.ico",
+              "projects/fr05/src/assets"
+            ],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "projects/fr05/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/fr05/src/environments/environment.ts",
+                  "with": "projects/fr05/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "fr05:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "fr05:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "fr05:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/fr05/src/test.ts",
+            "polyfills": "projects/fr05/src/polyfills.ts",
+            "tsConfig": "projects/fr05/tsconfig.spec.json",
+            "karmaConfig": "projects/fr05/karma.conf.js",
+            "styles": [
+              "projects/fr05/src/styles.css"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/fr05/src/favicon.ico",
+              "projects/fr05/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/fr05/tsconfig.app.json",
+              "projects/fr05/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "fr04": {
+      "root": "projects/fr04/",
+      "sourceRoot": "projects/fr04/src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/fr04",
+            "index": "projects/fr04/src/index.html",
+            "main": "projects/fr04/src/main.ts",
+            "polyfills": "projects/fr04/src/polyfills.ts",
+            "tsConfig": "projects/fr04/tsconfig.app.json",
+            "assets": [
+              "projects/fr04/src/favicon.ico",
+              "projects/fr04/src/assets"
+            ],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "projects/fr04/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/fr04/src/environments/environment.ts",
+                  "with": "projects/fr04/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "fr04:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "fr04:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "fr04:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/fr04/src/test.ts",
+            "polyfills": "projects/fr04/src/polyfills.ts",
+            "tsConfig": "projects/fr04/tsconfig.spec.json",
+            "karmaConfig": "projects/fr04/karma.conf.js",
+            "styles": [
+              "projects/fr04/src/styles.css"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/fr04/src/favicon.ico",
+              "projects/fr04/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/fr04/tsconfig.app.json",
+              "projects/fr04/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "fr03": {
+      "root": "projects/fr03/",
+      "sourceRoot": "projects/fr03/src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/fr03",
+            "index": "projects/fr03/src/index.html",
+            "main": "projects/fr03/src/main.ts",
+            "polyfills": "projects/fr03/src/polyfills.ts",
+            "tsConfig": "projects/fr03/tsconfig.app.json",
+            "assets": [
+              "projects/fr03/src/favicon.ico",
+              "projects/fr03/src/assets"
+            ],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "projects/fr03/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/fr03/src/environments/environment.ts",
+                  "with": "projects/fr03/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "fr03:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "fr03:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "fr03:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/fr03/src/test.ts",
+            "polyfills": "projects/fr03/src/polyfills.ts",
+            "tsConfig": "projects/fr03/tsconfig.spec.json",
+            "karmaConfig": "projects/fr03/karma.conf.js",
+            "styles": [
+              "projects/fr03/src/styles.css"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/fr03/src/favicon.ico",
+              "projects/fr03/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/fr03/tsconfig.app.json",
+              "projects/fr03/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "fr02": {
+      "root": "projects/fr02/",
+      "sourceRoot": "projects/fr02/src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/fr02",
+            "index": "projects/fr02/src/index.html",
+            "main": "projects/fr02/src/main.ts",
+            "polyfills": "projects/fr02/src/polyfills.ts",
+            "tsConfig": "projects/fr02/tsconfig.app.json",
+            "assets": [
+              "projects/fr02/src/favicon.ico",
+              "projects/fr02/src/assets"
+            ],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "projects/fr02/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/fr02/src/environments/environment.ts",
+                  "with": "projects/fr02/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "fr02:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "fr02:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "fr02:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/fr02/src/test.ts",
+            "polyfills": "projects/fr02/src/polyfills.ts",
+            "tsConfig": "projects/fr02/tsconfig.spec.json",
+            "karmaConfig": "projects/fr02/karma.conf.js",
+            "styles": [
+              "projects/fr02/src/styles.css"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/fr02/src/favicon.ico",
+              "projects/fr02/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/fr02/tsconfig.app.json",
+              "projects/fr02/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "fr01": {
+      "root": "projects/fr01/",
+      "sourceRoot": "projects/fr01/src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/fr01",
+            "index": "projects/fr01/src/index.html",
+            "main": "projects/fr01/src/main.ts",
+            "polyfills": "projects/fr01/src/polyfills.ts",
+            "tsConfig": "projects/fr01/tsconfig.app.json",
+            "assets": [
+              "projects/fr01/src/favicon.ico",
+              "projects/fr01/src/assets"
+            ],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "projects/fr01/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/fr01/src/environments/environment.ts",
+                  "with": "projects/fr01/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "fr01:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "fr01:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "fr01:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/fr01/src/test.ts",
+            "polyfills": "projects/fr01/src/polyfills.ts",
+            "tsConfig": "projects/fr01/tsconfig.spec.json",
+            "karmaConfig": "projects/fr01/karma.conf.js",
+            "styles": [
+              "projects/fr01/src/styles.css"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/fr01/src/favicon.ico",
+              "projects/fr01/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/fr01/tsconfig.app.json",
+              "projects/fr01/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "fr-remote": {
+      "root": "projects/fr-remote",
+      "sourceRoot": "projects/fr-remote/src",
+      "projectType": "library",
+      "prefix": "fr",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/fr-remote/tsconfig.lib.json",
+            "project": "projects/fr-remote/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/fr-remote/src/test.ts",
+            "tsConfig": "projects/fr-remote/tsconfig.spec.json",
+            "karmaConfig": "projects/fr-remote/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/fr-remote/tsconfig.lib.json",
+              "projects/fr-remote/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "fr-local": {
+      "root": "projects/fr-local",
+      "sourceRoot": "projects/fr-local/src",
+      "projectType": "library",
+      "prefix": "fr",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/fr-local/tsconfig.lib.json",
+            "project": "projects/fr-local/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/fr-local/src/test.ts",
+            "tsConfig": "projects/fr-local/tsconfig.spec.json",
+            "karmaConfig": "projects/fr-local/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/fr-local/tsconfig.lib.json",
+              "projects/fr-local/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "fr06": {
+      "root": "projects/fr06/",
+      "sourceRoot": "projects/fr06/src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/fr06",
+            "index": "projects/fr06/src/index.html",
+            "main": "projects/fr06/src/main.ts",
+            "polyfills": "projects/fr06/src/polyfills.ts",
+            "tsConfig": "projects/fr06/tsconfig.app.json",
+            "assets": [
+              "projects/fr06/src/favicon.ico",
+              "projects/fr06/src/assets"
+            ],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "projects/fr06/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/fr06/src/environments/environment.ts",
+                  "with": "projects/fr06/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "fr06:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "fr06:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "fr06:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/fr06/src/test.ts",
+            "polyfills": "projects/fr06/src/polyfills.ts",
+            "tsConfig": "projects/fr06/tsconfig.spec.json",
+            "karmaConfig": "projects/fr06/karma.conf.js",
+            "styles": [
+              "projects/fr06/src/styles.css"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/fr06/src/favicon.ico",
+              "projects/fr06/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/fr06/tsconfig.app.json",
+              "projects/fr06/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "fr01"
+}
