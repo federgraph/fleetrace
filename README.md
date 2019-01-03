@@ -8,21 +8,21 @@ Code is at version 0.0.1, considered Alpha.
 
 ## scoring lib
 
-This is the 'javascore compatible' scoring code. It implements the Racing Rules Of Sailing, Appendix A - Scoring.
+This is the 'javascore compatible' scoring code.
+
+It implements the Racing Rules Of Sailing, Appendix A - Scoring.
 
 JavaScore always had an GPL license. I looked hard into the javascore project a long time ago, and ported some of the core scoring logic to Delphi and  C#.
 
-I do not want to reinvent the wheel, and I appriciate the work that was done in the javascore project as the original source.
-
-Actually, the typescript code in project scoring was ported from Delphi.
+I do not want to reinvent the wheel, and I appreciate the work that was done in the javascore project as the original source for series scoring.
 
 ## fleetrace lib
 
-This is the main portion of the code for the FR applications.
+This is the main portion of the code for the Angular FR applications.
 
 All code was ported to typescript from Delphi and/or C#.
 
-(I wrote the code.)
+(I wrote the Delphi code, the C# code, and now the typescript code.)
 
 ## fr-home lib
 
@@ -34,13 +34,13 @@ This project contains Angular components which will depend on the availability o
 
 ## FR01 app
 
-You can use ng serve fr01 to see this app in Chrome and debug with dev-tools.
+You can use ng serve fr01 to see FR01 application in Chrome and debug with dev-tools.
 
-This is where you start to explore the project.
+(This is where you are expected to start exploring.)
 
 ## How to build
 
-(Later, when I have uploaded the code.)
+(Later, when I have uploaded the code, do this:)
 
 - First run `ng build scoring` to build the scoring library.
 - Next run `ng build fleetrace` to build the fleetrace library.
