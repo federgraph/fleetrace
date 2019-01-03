@@ -1,0 +1,175 @@
+<div class="mat-typography mat-app-background">
+
+    <mat-toolbar color="primary">
+        <span class="fill-remaining-space"></span>
+
+        <button mat-icon-button (click)="toggleInput()">
+            <mat-icon>touch_app</mat-icon>
+        </button>
+        <button mat-icon-button (click)="reduceToEntries()">
+            <mat-icon>people</mat-icon>
+        </button>
+        <button mat-icon-button (click)="reduceToEvent()">
+            <mat-icon>event</mat-icon>
+        </button>
+        <button mat-icon-button (click)="reduceToRace()">
+            <mat-icon>directions_run</mat-icon>
+        </button>
+        <button mat-icon-button (click)="reduceToBib()">
+            <mat-icon>person</mat-icon>
+        </button>
+        <button mat-icon-button (click)="reduceToNone()">
+            <mat-icon>texture</mat-icon>
+        </button>
+
+        <span class="fill-remaining-space"></span>
+    </mat-toolbar>
+
+    <div class="real-content">
+
+        <div class="button-row">
+
+            <!-- <button mat-raised-button (click)="reduceToParams()">Params</button> -->
+            <!-- <button mat-raised-button (click)="reduceToProps()">Props</button> -->
+            <!-- <button mat-raised-button (click)="reduceToEntry()">Entry</button> -->
+
+            <button mat-raised-button (click)="reduceToPreText()">Pre Text</button>
+            <button mat-raised-button (click)="reduceToTextArea()">Text Area</button>
+            <!-- <button mat-raised-button (click)="reduceToJsonInfo()">Json Info</button> -->
+
+            <!-- <button mat-raised-button (click)="reduceToAssetMenu()">Asset Menu</button> -->
+            <!-- <button mat-raised-button (click)="reduceToEventMenu()">Event Menu</button> -->
+
+            <!-- <button mat-raised-button (click)="reduceToSave()">Save</button> -->
+            <!-- <button mat-raised-button (click)="reduceToLoad()">Load</button> -->
+
+            <!-- <button mat-raised-button *ngIf="LinkBtnVisible" (click)="toggleConn()">Conn</button> -->
+
+            <button mat-raised-button (click)="toggleExplorerLine()">ExplorerLine</button>
+            <button mat-raised-button (click)="toggleBigButtonRow()">BBR</button>
+            <button mat-raised-button (click)="toggleDebug()">Debug</button>
+
+            <!-- <button mat-raised-button (click)="autoLoad()">Auto Load</button> -->
+            <!-- <button mat-raised-button (click)="autoSave()">Auto Save</button> -->
+
+            <button mat-raised-button (click)="enableRaceBtnClick()">ER</button>
+            <!-- <button mat-raised-button (click)="clearTimepointBtnClick()">CTP</button>
+            <button mat-raised-button (click)="clearRaceBtnClick()">CR</button>
+            <button mat-raised-button (click)="clearBtnClick()">CE</button> -->
+            <button mat-raised-button (click)="updateEvent()">UE</button>
+        </div>
+
+        <pre *ngIf="ExplorerLineVisible">--- <span class="color-accent">Race {{CurrentRace}}</span> --- <span class="color-primary">IT {{CurrentTP}}</span> --- Bib {{CurrentBib}} ---</pre>
+
+        <ng-container *ngIf="ButtonPanelVisible">
+            <h2>Panel</h2>
+
+            <div class="button-line">
+                <button mat-stroked-button color="primary" (click)="toggleButtonPanel()">Icons</button>
+                <button mat-stroked-button color="primary" (click)="toggleRows()">Rows</button>
+                <button mat-stroked-button color="primary" (click)="initCurrent()">Next</button>
+            </div>
+
+            <div class="button-line">
+                <button mat-raised-button (click)="raceDeltaBtnClick(-1)">R-</button>
+                <button mat-raised-button (click)="reduceToEvent()">R {{CurrentRace}}</button>
+                <button mat-raised-button (click)="raceDeltaBtnClick(1)">R+</button>
+            </div>
+
+            <div class="button-line">
+                <button mat-raised-button (click)="timepointDeltaBtnClick(-1)">IT-</button>
+                <button mat-raised-button (click)="reduceToRace()">IT {{CurrentTP}}</button>
+                <button mat-raised-button (click)="timepointDeltaBtnClick(1)">IT+</button>
+            </div>
+
+            <div class="button-line">
+                <button mat-raised-button (click)="bow(-1)">Bib-</button>
+                <button mat-raised-button (click)="reduceToBib()">{{CurrentBib}}</button>
+                <button mat-raised-button (click)="bow(1)">Bib+</button>
+            </div>
+
+            <div class="button-line" *ngIf="ThrowoutsRowVisible">
+                <button mat-raised-button (click)="throwOut(-1)">T-</button>
+                <button mat-raised-button (click)="reduceToEntries()">{{Throwouts}}</button>
+                <button mat-raised-button (click)="throwOut(+1)">T+</button>
+            </div>
+
+            <div class="button-line" *ngIf="FormsRowVisible">
+                <button mat-stroked-button color="primary" (click)="reduceToParams()">Params</button>
+                <button mat-stroked-button color="primary" (click)="reduceToProps()">Props</button>
+                <button mat-stroked-button color="primary" (click)="reduceToEntry()">Names</button>
+            </div>
+
+            <div class="button-line" *ngIf="ClearingRowVisible">
+                <button mat-raised-button color="accent" (click)="clearBtnClick()">Clear</button>
+                <button mat-raised-button color="accent" (click)="clearRaceBtnClick()">Clear R</button>
+                <button mat-raised-button color="accent" (click)="clearTimepointBtnClick()">Clear IT</button>
+            </div>
+
+            <div class="button-line" *ngIf="ResetRowVisible">
+                <button mat-raised-button color="primary" (click)="resetBtnClick()">Reset</button>
+                <button mat-raised-button color="primary" (click)="exampleBtnClick()">Example</button>
+                <button mat-raised-button color="primary" (click)="assetBtnClick(3)">1991</button>
+            </div>
+
+            <div class="button-line" *ngIf="TableRowVisible">
+                <button mat-stroked-button (click)="ensureBib()">Bib</button>
+                <button mat-stroked-button (click)="ensureEvent()">Event</button>
+                <button mat-stroked-button (click)="ensureRace()">Race</button>
+            </div>
+
+            <p></p>
+        </ng-container>
+
+        <fr-timing-buttons *ngIf=InputVisible #timingTab
+            (onSendMsg)="sendMsg($event)" 
+            (onUpdateAll)="handleUpdate($event)"
+            (onCalc)="handleCalc($event)"></fr-timing-buttons>
+
+        <ng-container *ngIf=TextAreaVisible>
+            <h2>Text Area</h2>
+
+            <div class="button-row">
+                <button mat-raised-button (click)="memoClear()">Clear</button>
+                <button mat-raised-button (click)="memoAsset()">Asset</button>
+                <button mat-raised-button (click)="memoConvertedData()">Converted</button>
+                <button mat-raised-button (click)="memoText(false)">Text</button>
+                <button mat-raised-button (click)="memoText(true)">Compact</button>
+                <button mat-raised-button color="accent" (click)="memoRead()">Read</button>
+                <button mat-raised-button (click)="memoCopy(memo)">Copy</button>
+            </div>
+
+            <div class="memo-form">
+                <mat-form-field class="memo">
+                    <textarea #memo matInput spellcheck="false" rows="16" class="memo" [(ngModel)]="MemoText"
+                        [ngModelOptions]="{standalone: true}"></textarea>
+                </mat-form-field>
+            </div>
+        </ng-container>
+
+        <ng-container *ngIf=PreTextVisible>
+            <h2>Pre Text</h2>
+
+            <div class="button-row">
+                <button mat-raised-button (click)="clearTextOutput()">Clear</button>
+                <button mat-raised-button (click)="showConvertedData()">Converted</button>
+                <button mat-raised-button (click)="getTxtBackup(false)">Text</button>
+                <button mat-raised-button (click)="getTxtBackup(true)">Compact</button>
+            </div>
+
+            <pre>{{TestOutput}}</pre>
+        </ng-container>
+
+        <fr-form-entry-row *ngIf="EntryVisible" (entryDeleted)="onEntryDeleted($event)" (entryRowChanged)="onEntryRowChanged($event)"></fr-form-entry-row>
+
+        <fr-bib-tab *ngIf=BibVisible #bibInfo [bib]=CurrentBib (bibChanged)="onBibChanged($event)"></fr-bib-tab>
+        <fr-entries-tab *ngIf=EntriesVisible #entriesTab (entriesTableChanged)="onEntriesTableChanged($event)"></fr-entries-tab>
+        <fr-race-tab *ngIf=RaceVisible #raceTab [race]="CurrentRace" [timepoint]="CurrentTP"></fr-race-tab>
+        <fr-event-tab *ngIf=EventVisible #eventTab [EventName]="EventName"></fr-event-tab>
+
+        <fr-form-event-params-quick *ngIf="ParamsVisible" (paramsChanged)="onParamsChanged($event)"></fr-form-event-params-quick>
+        <fr-form-event-props-quick *ngIf="PropsVisible" (propsChanged)="onPropsChanged($event)"></fr-form-event-props-quick>
+
+    </div>
+
+</div>
