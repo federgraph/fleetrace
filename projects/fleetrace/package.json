@@ -1,0 +1,17 @@
+{
+  "name": "fleetrace",
+  "version": "0.0.1",
+  "description": "This angular library attempts to be an unofficial timing and scoring solution for a sail boat fleet racing event.",
+  "keywords" :["angular", "typescript", "library", "sailing", "racing", "timing", "scoring"],
+  "author": "Gustav Schubert <gschub@gmail.com>",
+  "homepage": "https://federgraph.de/",
+  "license": "GPL-3.0",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/federgraph/fleetrace"
+  },
+  "peerDependencies": {
+    "@angular/common": "^7.1.0",
+    "@angular/core": "^7.1.0"
+  }
+}
