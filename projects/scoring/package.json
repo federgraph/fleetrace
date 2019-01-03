@@ -1,0 +1,14 @@
+{
+  "name": "scoring",
+  "version": "0.0.1",
+  "description": "This Angular library implements RRS-Appendix-A-Scoring in a javascore compatible fashion.",
+  "keywords" :["angular","library", "rrs", "racing", "rules", "sailing", "scoring"],
+  "license" : "GPL-3.0",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/federgraph/fleetrace"
+  },  "peerDependencies": {
+    "@angular/common": "^7.1.0",
+    "@angular/core": "^7.1.0"
+  }
+}
