@@ -155,7 +155,7 @@ export class TStammdatenBO extends TBaseColBO<
             let i: number;
             try
             {
-                i = Number.parseInt(ColName.substring(5)); // 'col_N'x
+                i = Number.parseInt(ColName.substring(5), 10); // 'col_N'x
             }
             catch
             {

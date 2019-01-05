@@ -61,7 +61,7 @@ export class FormEventParamsQuickComponent implements OnInit {
   }
 
   patch() {
-    let bop = this.BOManager.BO.BOParams;
+    const bop = this.BOManager.BO.BOParams;
     this.RaceCount = bop.RaceCount;
     this.ITCount = bop.ITCount;
     this.StartlistCount = bop.StartlistCount;

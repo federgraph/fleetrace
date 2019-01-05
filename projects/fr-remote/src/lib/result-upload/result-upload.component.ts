@@ -33,7 +33,7 @@ export class ResultUploadComponent implements OnInit {
 
   post() {
     this.Info = `post() called for race ${this.race}`;
-    let t: RaceDataJson = this.jsonInfo.getRaceDataJson(this.race);
+    const t: RaceDataJson = this.jsonInfo.getRaceDataJson(this.race);
     this.apiService.push3(t).subscribe(data => this.TestOutput = data.retvalue);
   }
 

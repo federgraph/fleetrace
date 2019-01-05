@@ -20,7 +20,7 @@ import {ScoringModule} from 'scoring';
 import {FleetRaceModule} from 'fleetrace';
 import {FrLocalModule} from 'fr-local';
 
-import { ApiComponent } from './api/api.component'
+import { ApiComponent } from './api/api.component';
 import { LoadComponent } from './load/load.component';
 import { SaveComponent } from './save/save.component';
 import { ResultUploadComponent } from './result-upload/result-upload.component';

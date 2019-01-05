@@ -230,9 +230,9 @@ export class AppComponent implements OnInit {
       this.breakText = "WebLandscape";
     }
     else {
-      this.break6 = this.columns == 6;
-      this.break9 = this.columns == 9;
-      this.break11 = this.columns == 11;
+      this.break6 = this.columns === 6;
+      this.break9 = this.columns === 9;
+      this.break11 = this.columns === 11;
       this.wantAllInputIcons = this.columns > 9;
       this.breakText = "BreakpointMap";
     }
@@ -250,26 +250,26 @@ export class AppComponent implements OnInit {
     this.initParams();
 
     this.breakpointObserver.observe(Breakpoints.Small).subscribe(
-      (state: BreakpointState) => { this.handleBreakpointSmall(state) }
+      (state: BreakpointState) => { this.handleBreakpointSmall(state); }
     );
     this.breakpointObserver.observe(Breakpoints.XSmall).subscribe(
-      (state: BreakpointState) => { this.handleBreakpointSmall(state) }
+      (state: BreakpointState) => { this.handleBreakpointSmall(state); }
     );
 
     this.breakpointObserver.observe(this.breakpointSet.all()).subscribe(
-      (state: BreakpointState) => { this.breakpointChanged(state) }
+      (state: BreakpointState) => { this.breakpointChanged(state); }
     );
   }
 
   autoLoad() {
-    let t = localStorage.getItem(this.autoSaveDataKey);
+    const t = localStorage.getItem(this.autoSaveDataKey);
 
     if (t === undefined) { }
     else if (t === null) { }
     else if (t === "") { }
     else {
 
-      let edi = new IEventDataItem();
+      const edi = new IEventDataItem();
       edi.EventData = t;
       edi.EventName = "";
       this.NewEventData = edi;
@@ -277,7 +277,7 @@ export class AppComponent implements OnInit {
   }
 
   autoSave() {
-    let SL = new TStringList();
+    const SL = new TStringList();
     this.BOManager.BO.BackupToSLCompact(SL, true);
     localStorage.setItem(this.autoSaveDataKey, SL.Text);
   }
@@ -624,7 +624,7 @@ export class AppComponent implements OnInit {
   }
 
   onRaceDataAvailable(data: string[]) {
-    for (let s of data)
+    for (const s of data)
       this.BOManager.BO.Dispatch(s);
 
     this.calcRace();
@@ -646,7 +646,7 @@ export class AppComponent implements OnInit {
   }
 
   onParamsChanged(event: EventParams) {
-    if (event.createOption == 0)
+    if (event.createOption === 0)
       this.createNew(event);
     else
       this.recreateEvent(event);
@@ -1065,7 +1065,7 @@ export class AppComponent implements OnInit {
   }
 
   copyText(value: string) {
-    let selBox = document.createElement('textarea');
+    const selBox = document.createElement('textarea');
     selBox.style.position = 'fixed';
     selBox.style.left = '0';
     selBox.style.top = '0';
@@ -1083,12 +1083,12 @@ export class AppComponent implements OnInit {
   }
 
   createNew(event: EventParams) {
-    let ed: IEventDataItem = {
+    const ed: IEventDataItem = {
       EventName: "New Event",
       EventData: ""
     };
 
-    let sl: string[] = [];
+    const sl: string[] = [];
 
     sl.push("DP.RaceCount=" + event.raceCount);
     sl.push("DP.ITCount=" + event.itCount);
@@ -1171,7 +1171,7 @@ export class AppComponent implements OnInit {
   initCurrentDefault() {
     const bo = this.BOManager.BO;
 
-    let r = 1;
+    const r = 1;
 
     let tp = 1;
     if (bo.EventProps.IsTimed === false || bo.BOParams.ITCount === 0)
@@ -1186,7 +1186,7 @@ export class AppComponent implements OnInit {
     let cn = new CurrentNumbers();
 
     if (bo.BOParams.ITCount > 0)
-      cn = bo.findCurrentInRace(cn)
+      cn = bo.findCurrentInRace(cn);
     else
       cn = bo.findCurrentInEvent(cn);
 
@@ -1227,23 +1227,23 @@ export class AppComponent implements OnInit {
     while (this.BOManager.BO.msgQueueR.length > 0) {
       msg = this.BOManager.BO.msgQueueR.pop();
       this.BOManager.BO.Dispatch(msg);
-      this.sendMsg(msg)
+      this.sendMsg(msg);
     }
 
     while (this.BOManager.BO.msgQueueE.length > 0) {
       msg = this.BOManager.BO.msgQueueE.pop();
-      if (msg != "" && this.WantUpdateEvent) {
+      if (msg !== "" && this.WantUpdateEvent) {
         this.BOManager.BO.Dispatch(msg);
         this.sendMsg(msg);
       }
     }
 
-    this.updateAfterProcessingQueue(calc)
+    this.updateAfterProcessingQueue(calc);
   }
 
   showQueue() {
-    let l = this.BOManager.BO.msgQueueR.concat(this.BOManager.BO.msgQueueE);
-    if (l.length == 0)
+    const l = this.BOManager.BO.msgQueueR.concat(this.BOManager.BO.msgQueueE);
+    if (l.length === 0)
       this.TestOutput = this.info("Queue is empty");
     else {
       const SL = new TStringList();
@@ -1311,7 +1311,7 @@ export class AppComponent implements OnInit {
   handleUpdate(value: number) {
     switch (value) {
       case 1: this.updateAfterProcessingQueue(); break;
-      case 2: this.showQueue();
+      case 2: this.showQueue(); break;
       default: this.updateAll();
     }
 

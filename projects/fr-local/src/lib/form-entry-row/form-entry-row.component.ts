@@ -32,13 +32,13 @@ export class FormEntryRowComponent implements OnInit {
       entry: this.fb.group(new EntryRow())
     });
 
-   this.form.get('entry.SNR').setValidators([Validators.required, Validators.min(1), Validators.max(10000)])
+   this.form.get('entry.SNR').setValidators([Validators.required, Validators.min(1), Validators.max(10000)]);
   }
 
   delete() {
-    let ac = this.form.get('entry.SNR');
+    const ac = this.form.get('entry.SNR');
     if (ac.valid) {
-      let snr = ac.value as number;
+      const snr = ac.value as number;
       const cr = this.BOManager.BO.StammdatenNode.Collection.FindKey(snr);
       if (cr) {
         cr.Collection.Delete(cr.Index);
@@ -48,9 +48,9 @@ export class FormEntryRowComponent implements OnInit {
   }
 
   patch() {
-    let ac = this.form.get('entry.SNR');
+    const ac = this.form.get('entry.SNR');
     if (ac.valid) {
-      let snr = ac.value as number;
+      const snr = ac.value as number;
       const cr = this.BOManager.BO.StammdatenNode.Collection.FindKey(snr);
       if (cr) {
         console.assert(snr === cr.SNR);
@@ -77,7 +77,7 @@ export class FormEntryRowComponent implements OnInit {
 
   reset() {
     this.formData = new EntryRow();
-    let snr = this.form.get('entry.SNR').value;
+    const snr = this.form.get('entry.SNR').value;
     if (snr && snr > 0)
       this.formData.SNR = snr;
     this.rebuildForm();

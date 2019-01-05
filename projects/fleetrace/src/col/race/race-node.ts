@@ -144,7 +144,7 @@ export class TRaceNode extends TBaseNode<
 
         Calc(): void
         {
-			this.BO.CalcTP.Calc(this);
+            this.BO.CalcTP.Calc(this);
             this.Modified = false;
             if (this.OnCalc != null)
                 this.OnCalc(this);

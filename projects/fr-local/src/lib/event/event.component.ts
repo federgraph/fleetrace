@@ -104,7 +104,7 @@ export class EventComponent {
 
   /** this method can NOT be called from the constructor */
   loadResult() {
-    let bo = this.BOManager.BO;
+    const bo = this.BOManager.BO;
     bo.EventBO.RelaxedInputMode = true;
 
     // use Pos to assign RaceValue to an entry in the race

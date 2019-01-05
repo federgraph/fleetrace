@@ -37,7 +37,7 @@ export class FormEventPropsComponent implements OnInit {
   }
 
   patch() {
-    let ep = this.BOManager.BO.EventProps;
+    const ep = this.BOManager.BO.EventProps;
     this.formData.eventName = ep.EventName;
     this.formData.scoringSystem = ep.ScoringSystem;
     this.formData.schemaCode = ep.SchemaCode;

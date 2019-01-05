@@ -108,7 +108,7 @@ export class ApiService {
   }
 
   requestNetto1(): Observable<string> {
-    let headers = new HttpHeaders();
+    const headers = new HttpHeaders();
     headers.append('Access-Control-Allow-Origin', 'http://localhost/3000');
 
     return this.http.get('api/widget/netto', {
@@ -135,7 +135,7 @@ export class ApiService {
     let p: HttpParams = new HttpParams();
     p = p.set('race', race.toString());
 
-    let o: QueryOptions =  new QueryOptions();
+    const o: QueryOptions =  new QueryOptions();
     o.headers = JsonOptions.headers;
     o.params = p;
 
@@ -163,7 +163,7 @@ export class ApiService {
     let p: HttpParams = new HttpParams();
     p = p.set('race', race.toString());
 
-    let o: QueryOptions =  new QueryOptions();
+    const o: QueryOptions =  new QueryOptions();
     o.headers = JsonOptions.headers;
     o.params = p;
 
@@ -328,7 +328,8 @@ export class ApiService {
   }
 
   getTimingEventForTable(race: number, it: number, bib: number, option: number, mode: number): Observable<string> {
-    return this.http.get(`/api/widget/do-timing-event-for-table?race=${race}&it=${it}&bib=${bib}&option=${option}&mode=${mode}`, {responseType: 'text'});
+    return this.http.get(`/api/widget/do-timing-event-for-table?race=${race}&it=${it}&bib=${bib}&option=${option}&mode=${mode}`,
+      {responseType: 'text'});
   }
 
   getTimingEvent(race: number, it: number, bib: number, option: number): Observable<string> {
@@ -356,6 +357,6 @@ export class ApiService {
     // return an observable with a user-facing error message
     return throwError(
       'Something bad happened; please try again later.');
-  };
+  }
 
 }

@@ -4,7 +4,7 @@ export class TProp {
 }
 
 export class TProps {   
-    [key: string] : any;
+    [key: string]: any;
 
     FCount: number = 0;
 

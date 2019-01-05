@@ -37,7 +37,7 @@ export class TEventRaceEntry {
     }
 
     inspect(): TEventRaceEntryInspection {
-        let o = new TEventRaceEntryInspection();
+        const o = new TEventRaceEntryInspection();
 
         o.Penalty = this.FPenalty.toString();
 
@@ -136,7 +136,7 @@ export class TEventRaceEntry {
         if (value === "0")
             this.OTime = 0;
         else if (TUtils.StrToIntDef(value, -1) > 0)
-            this.OTime = Number.parseInt(value);
+            this.OTime = Number.parseInt(value, 10);
 
         else if (value.length > 1 && value[0] === 'F')
             this.Fleet = this.ParseFleet(value);

@@ -49,11 +49,12 @@ export const ScoringSystemStrings = ['Low Point', 'Bonus Point', 'Bonus Point DS
 export const NameFieldSchemaStrings = ['Default', 'Long Names', 'NX'];
 
 export class EventParamJson {
+    static prefix = 'DP';
+
     RaceCount: number = 2;
     ITCount: number = 0;
     StartlistCount: number = 2;    
 
-    static prefix = 'DP';
     private SL: string[] = [];    
 
     toArray(): string[] {
@@ -70,6 +71,8 @@ export class EventParamJson {
 }
 
 export class EventPropJson {
+    static prefix = 'EP';
+
     Name = 'Test Event Name';
     ScoringSystem = 'Low Point System';
     Throwouts = 0;
@@ -88,7 +91,6 @@ export class EventPropJson {
     IsTimed = false;
     UseCompactFormat = true;
     
-    static prefix = 'EP';
     private SL: string[] = [];
 
     toArray(): string[] {

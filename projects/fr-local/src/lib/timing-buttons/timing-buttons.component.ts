@@ -15,7 +15,7 @@ export class TimingButtonsComponent implements OnInit {
     @Output() onUpdateAll: EventEmitter<number> = new EventEmitter();
     @Output() onCalc: EventEmitter<number> = new EventEmitter();
 
-    BowTupples: Array<[number, boolean]>
+    BowTupples: Array<[number, boolean]>;
     Bows: Array<number> = [];
     Bibs: Array<number> = [];
 
@@ -120,7 +120,7 @@ export class TimingButtonsComponent implements OnInit {
 
     update() {
         this.updateFromTimePoint();
-        this.filterOutFinishedBibs()
+        this.filterOutFinishedBibs();
         this.countShown = this.Bibs.length;
         if (this.autoShow)
             this.fill();
@@ -129,9 +129,9 @@ export class TimingButtonsComponent implements OnInit {
     }
 
     updateFromEvent() {
-        let ba: Array<number> = [];
+        const ba: Array<number> = [];
 
-        let r = this.check_r(this.CurrentRace);
+        const r = this.check_r(this.CurrentRace);
 
         const cl = this.BOManager.BO.EventNode.Collection.Items;
         let cr: TEventRowCollectionItem;
@@ -154,9 +154,9 @@ export class TimingButtonsComponent implements OnInit {
      * since the entry has already completed that race or is Out.
      */
     filterOutFinishedBibs() {
-        let ba: Array<number> = [];
+        const ba: Array<number> = [];
 
-        let r = this.check_r(this.CurrentRace);
+        const r = this.check_r(this.CurrentRace);
 
         const cl = this.BOManager.BO.EventNode.Collection.Items;
         let cr: TEventRowCollectionItem;
@@ -178,9 +178,9 @@ export class TimingButtonsComponent implements OnInit {
      * Used in FR01 (event only app, there is no race timing included)
      */
     updateFromTimePoint() {
-        let ba: Array<number> = [];
+        const ba: Array<number> = [];
         let r = this.CurrentRace;
-        let t = this.CurrentTP;
+        const t = this.CurrentTP;
 
         r = this.check_r(r);
 
@@ -200,7 +200,7 @@ export class TimingButtonsComponent implements OnInit {
 
     buildBowTupples() {
         let bt: [number, boolean];
-        let bts: Array<[number, boolean]> = [];
+        const bts: Array<[number, boolean]> = [];
 
         const l = this.BOManager.BO.BOParams.StartlistCount;
 
@@ -272,8 +272,8 @@ export class TimingButtonsComponent implements OnInit {
     }
 
     prepareNC() {
-        let cr = this.BOManager.BO.EventNode.FindBib(this.CurrentBib);
-        let snr = cr.SNR;
+        const cr = this.BOManager.BO.EventNode.FindBib(this.CurrentBib);
+        const snr = cr.SNR;
         this.InputMsgText1 = `FR.*.SNR${snr}.NC=GER`;
         this.InputMsgText2 = '';
     }
@@ -315,7 +315,7 @@ export class TimingButtonsComponent implements OnInit {
             case 4: mt = 4; qu = 'ok'; break;
         }
 
-        let erase = this.option === 5;
+        const erase = this.option === 5;
 
         let te: string;
         let tr: string;
@@ -343,15 +343,15 @@ export class TimingButtonsComponent implements OnInit {
         if (this.BOManager.BO.Auto) {
             if (this.BOManager.BO.UseQueue) {
                 this.BOManager.BO.msgQueueR.push(tr);
-                if (te != "" && this.WantUpdateEvent) {
+                if (te !== "" && this.WantUpdateEvent) {
                     this.BOManager.BO.msgQueueE.push(te);
                 }
             }
             else {
                 this.BOManager.BO.Dispatch(tr);
-                this.onSendMsg.emit(tr)
+                this.onSendMsg.emit(tr);
 
-                if (te != "" && this.WantUpdateEvent) {
+                if (te !== "" && this.WantUpdateEvent) {
                     this.BOManager.BO.Dispatch(te);
                     this.onSendMsg.emit(te);
                 }
@@ -371,14 +371,14 @@ export class TimingButtonsComponent implements OnInit {
 
     send1() {
         if (this.InputMsgText1 !== "") {
-            let b1 = this.BOManager.BO.Dispatch(this.InputMsgText1);
+            const b1 = this.BOManager.BO.Dispatch(this.InputMsgText1);
             if (!b1)
                 console.log('could not dispatch msg 1: ' + this.InputMsgText1);
             else
                 this.onSendMsg.emit(this.InputMsgText1);
         }
-        if (this.InputMsgText2 != "" && this.WantUpdateEvent) {
-            let b2 = this.BOManager.BO.Dispatch(this.InputMsgText2);
+        if (this.InputMsgText2 !== "" && this.WantUpdateEvent) {
+            const b2 = this.BOManager.BO.Dispatch(this.InputMsgText2);
             if (!b2)
                 console.log('could not dispatch msg 2: ' + this.InputMsgText2);
             else
@@ -389,8 +389,8 @@ export class TimingButtonsComponent implements OnInit {
     }
 
     send2() {
-        if (this.InputMsgText2 != "" && this.WantUpdateEvent) {
-            let b2 = this.BOManager.BO.Dispatch(this.InputMsgText2);
+        if (this.InputMsgText2 !== "" && this.WantUpdateEvent) {
+            const b2 = this.BOManager.BO.Dispatch(this.InputMsgText2);
             if (!b2)
                 console.log('could not dispatch msg 2: ' + this.InputMsgText2);
         }
@@ -450,12 +450,12 @@ export class TimingButtonsComponent implements OnInit {
         while (this.BOManager.BO.msgQueueR.length > 0) {
             msg = this.BOManager.BO.msgQueueR.pop();
             this.BOManager.BO.Dispatch(msg);
-            this.onSendMsg.emit(msg)
+            this.onSendMsg.emit(msg);
         }
 
         while (this.BOManager.BO.msgQueueE.length > 0) {
             msg = this.BOManager.BO.msgQueueE.pop();
-            if (msg != "" && this.WantUpdateEvent) {
+            if (msg !== "" && this.WantUpdateEvent) {
                 this.BOManager.BO.Dispatch(msg);
                 this.onSendMsg.emit(msg);
             }
@@ -535,7 +535,7 @@ export class TimingButtonsComponent implements OnInit {
     }
 
     get InputMsgText2Visible(): boolean {
-        return this.CurrentTP == 0;
+        return this.CurrentTP === 0;
       }
     
 }

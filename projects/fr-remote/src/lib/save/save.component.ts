@@ -67,18 +67,18 @@ export class SaveComponent implements OnInit {
   }
 
   getCompactText(): string {
-    let SL = new TStringList();
+    const SL = new TStringList();
     this.BOManager.BO.BackupToSLCompact(SL, true);
     return SL.Text;
   }
 
   getJson(): EventDataJson {
-    let ji: JsonInfo = new JsonInfo(this.BOManager);
+    const ji: JsonInfo = new JsonInfo(this.BOManager);
     return ji.getEventDataJson();
   }
 
   getStringArray(): string[] {
-    let ji: JsonInfo = new JsonInfo(this.BOManager);
+    const ji: JsonInfo = new JsonInfo(this.BOManager);
     return ji.getEventData();
   }
 
@@ -136,7 +136,7 @@ export class SaveComponent implements OnInit {
         break;
 
       case this.soClipboard:
-        if (this.TestOutput != "") {
+        if (this.TestOutput !== "") {
           this.copyToClipboard(this.TestOutput);
           this.Info = 'staged text copied to clipboard.';
           this.openSnackBar('copied to clipboard');
@@ -148,7 +148,7 @@ export class SaveComponent implements OnInit {
         break;
 
       case this.soSession:
-        if (this.stagedCompactText != "") {
+        if (this.stagedCompactText !== "") {
           sessionStorage.setItem(this.eventDataKey, this.stagedCompactText);
           this.Info = 'compact text saved to session storage.';
           this.openSnackBar("saved to browser's session storage");
@@ -160,7 +160,7 @@ export class SaveComponent implements OnInit {
         break;
 
       case this.soLocal:
-        if (this.stagedCompactText != "") {
+        if (this.stagedCompactText !== "") {
           localStorage.setItem(this.eventDataKey, this.stagedCompactText);
           this.Info = 'compact text saved to local storage.';
           this.openSnackBar("'saved to browser's local storage");
@@ -193,7 +193,7 @@ export class SaveComponent implements OnInit {
   }
 
   copyToClipboard(value: string) {
-    let dummy = document.createElement("textarea");
+    const dummy = document.createElement("textarea");
     document.body.appendChild(dummy);
     dummy.value = value;
     dummy.select();

@@ -22,7 +22,7 @@ describe('grid-color', () => {
     it('should pass getRGBHexString() test', () => {
         const cr = new TColorTranslator();
         const s = cr.getRGBHexString("slategray");       
-        const c = Number.parseInt("0x" + s);
+        const c = Number.parseInt("0x" + s, 16);
         expect(c === 0x708090).toBe(true);
     });
 

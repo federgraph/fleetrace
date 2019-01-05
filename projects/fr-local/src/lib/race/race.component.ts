@@ -14,6 +14,13 @@ export class RaceComponent {
   FRace = 1;
   FTimePoint = 0;
 
+  ColGrid: TRaceColGrid;
+
+  ColTable: TTable;
+
+  legend: IconData[];
+  LegendVisible = false;
+
   resetRaceAndTimePoint() {
     this.FRace = 1;
     this.FTimePoint = 0;
@@ -40,13 +47,6 @@ export class RaceComponent {
     this.BOManager.BO.RaceBO.InitColsActive(this.ColGrid);
     this.show();
   }
-
-  ColGrid: TRaceColGrid;
-
-  ColTable: TTable;
-
-  legend: IconData[];
-  LegendVisible = false;
 
   constructor(public BOManager: TBOManager) {
     this.initGrid();
@@ -86,18 +86,18 @@ export class RaceComponent {
   calc() {
     this.BOManager.BO = this.BOManager.BO;
     if (this.race < this.BOManager.BO.RNode.length) {
-      let rn = this.BOManager.BO.RNode[this.race];
+      const rn = this.BOManager.BO.RNode[this.race];
       if (rn) {
         rn.Modified = true;
         this.BOManager.BO.Calc();
     this.show();
   }
       else {
-        console.log(`rn invalid for this.race = ${this.race} in race.component.calc `)
+        console.log(`rn invalid for this.race = ${this.race} in race.component.calc `);
       }
     }
     else {
-      console.log(`out of range: RNode[${this.race}] in race.component.calc `)
+      console.log(`out of range: RNode[${this.race}] in race.component.calc `);
     }
 
   }
@@ -129,7 +129,7 @@ export class RaceComponent {
   }
 
   toggleLayout() {
-    let cb = this.BOManager.BO.RaceBO;
+    const cb = this.BOManager.BO.RaceBO;
     if (!cb)
       return;
 
@@ -160,7 +160,7 @@ export class RaceComponent {
     this.show();
   }
     else {
-      console.log(`out of range: RNode[${this.race}} in race.component.fromMRank`)
+      console.log(`out of range: RNode[${this.race}} in race.component.fromMRank`);
     }
   }
 

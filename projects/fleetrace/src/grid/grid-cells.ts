@@ -34,7 +34,7 @@ export class TGridCells {
         if (this.map.has(k)) {
             const result = this.map.get(k);
             if (result)
-                return result
+                return result;
         }
         else {
             return this.DefaultValue;

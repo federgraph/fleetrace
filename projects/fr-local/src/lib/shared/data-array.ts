@@ -39,25 +39,25 @@ export class JsonInfo {
     o.TargetFleetSize = this.BOManager.BO.EventProps.TargetFleetSize;
     o.FirstFinalRace = this.BOManager.BO.EventProps.FirstFinalRace;
     o.IsTimed = this.BOManager.BO.EventProps.IsTimed;
-    o.UseCompactFormat = this.BOManager.BO.EventProps.UseCompactFormat
+    o.UseCompactFormat = this.BOManager.BO.EventProps.UseCompactFormat;
   }
 
   getEventParams(): string[] {
-    let o = new EventParamJson();
+    const o = new EventParamJson();
     this.updateParamJson(o);
     return o.toArray();
   }
 
   getEventProps(): string[] {
-    let o = new EventPropJson();
+    const o = new EventPropJson();
     this.updatePropJson(o);
     return o.toArray();
   }
 
   getNames(): string[] {
-    let Memo = new TStringList();
+    const Memo = new TStringList();
     this.ee.AddSection(TableID.NameList, this.BOManager.BO, Memo);
-    let SL: string[] = [];
+    const SL: string[] = [];
     for (let i = 0; i < Memo.Count; i++) {
       if (Memo.SL[i])
         SL.push(Memo.SL[i]);
@@ -66,9 +66,9 @@ export class JsonInfo {
   }
 
   getStartList(): string[] {
-    let Memo = new TStringList();
+    const Memo = new TStringList();
     this.ee.AddSection(TableID.StartList, this.BOManager.BO, Memo);
-    let SL: string[] = [];
+    const SL: string[] = [];
     for (let i = 0; i < Memo.Count; i++) {
       if (Memo.SL[i])
         SL.push(Memo.SL[i]);
@@ -77,12 +77,12 @@ export class JsonInfo {
   }
 
   getFleetList(): string[] {
-    let bo = this.BOManager.BO;
+    const bo = this.BOManager.BO;
     //if (bo.EventProps.UseFleets) {
     if (bo.EventNode.UseFleets) {
-      let Memo = new TStringList();
+      const Memo = new TStringList();
       this.ee.AddSection(TableID.FleetList, bo, Memo);
-      let SL: string[] = [];
+      const SL: string[] = [];
       for (let i = 0; i < Memo.Count; i++) {
         if (Memo.SL[i])
           SL.push(Memo.SL[i]);
@@ -95,9 +95,9 @@ export class JsonInfo {
   }
 
   getRaceFinishList(r: number): string[] {
-    let Memo = new TStringList();
+    const Memo = new TStringList();
     this.ee.AddRaceFinishSection(this.BOManager.BO, Memo, r);
-    let SL: string[] = [];
+    const SL: string[] = [];
     for (let i = 0; i < Memo.Count; i++) {
       if (Memo.SL[i])
         SL.push(Memo.SL[i]);
@@ -106,9 +106,9 @@ export class JsonInfo {
   }
 
   getFinishList(): string[] {
-    let Memo = new TStringList();
+    const Memo = new TStringList();
     this.ee.AddSection(TableID.FinishList, this.BOManager.BO, Memo);
-    let SL: string[] = [];
+    const SL: string[] = [];
     for (let i = 0; i < Memo.Count; i++) {
       if (Memo.SL[i])
         SL.push(Memo.SL[i]);
@@ -117,10 +117,10 @@ export class JsonInfo {
   }
 
   getTL(r: number): string[] {
-    let bo = this.BOManager.BO;
-    let Memo = new TStringList();
+    const bo = this.BOManager.BO;
+    const Memo = new TStringList();
     this.ee.AddTimingSection(bo, Memo, r);
-    let SL: string[] = [];
+    const SL: string[] = [];
     for (let i = 0; i < Memo.Count; i++) {
       if (Memo.SL[i])
         SL.push(Memo.SL[i]);
@@ -129,9 +129,9 @@ export class JsonInfo {
   }
 
   getPL(r: number): string[] {
-    let bo = this.BOManager.BO;
+    const bo = this.BOManager.BO;
     if (r > 0 && r <= bo.BOParams.RaceCount) {
-      let Memo = new TStringList();
+      const Memo = new TStringList();
       //Memo.Add(`PenaltyList.Begin.R${r}`);
       bo.BackupPenalties(Memo, r);
       //Memo.Add(`PenaltyList.End.R${r}`);
@@ -143,9 +143,9 @@ export class JsonInfo {
   }
 
   getTimeLists(): Array<Array<string>> {
-    let bo = this.BOManager.BO;
+    const bo = this.BOManager.BO;
     if (bo.BOParams.ITCount > 0 || bo.EventProps.IsTimed) {
-      let a = [];
+      const a = [];
       for (let r = 1; r <= bo.BOParams.RaceCount; r++) {
         a.push(this.getTL(r));
       }
@@ -155,8 +155,8 @@ export class JsonInfo {
   }
 
   getPenaltyLists(): Array<Array<string>> {
-    let bo = this.BOManager.BO;
-    let a = [];
+    const bo = this.BOManager.BO;
+    const a = [];
     for (let r = 1; r <= bo.BOParams.RaceCount; r++) {
       a.push(this.getPL(r));
     }                           
@@ -164,8 +164,8 @@ export class JsonInfo {
   }
 
   getPenaltyInfo(): object {
-    let bo = this.BOManager.BO;
-    let a: { [index: string]: string[] } = {};
+    const bo = this.BOManager.BO;
+    const a: { [index: string]: string[] } = {};
     for (let r = 1; r <= bo.BOParams.RaceCount; r++) {
       a["R" + r] = this.getPL(r);
     }
@@ -173,8 +173,8 @@ export class JsonInfo {
   }
 
   getEventDataJson(): EventDataJson {
-    let bo = this.BOManager.BO;
-    let o: EventDataJson = new EventDataJson;
+    const bo = this.BOManager.BO;
+    const o: EventDataJson = new EventDataJson;
     let temp: any;
 
     o.EventParams = this.getEventParams();
@@ -195,7 +195,7 @@ export class JsonInfo {
   }
 
   getRaceDataJson(r: number): RaceDataJson {
-    let o: RaceDataJson = new RaceDataJson;
+    const o: RaceDataJson = new RaceDataJson;
     o.FinishInfo = this.getRaceFinishList(r);
     o.TimingInfo = this.getTL(r);
     o.PenaltyInfo = this.getPL(r);
@@ -203,63 +203,63 @@ export class JsonInfo {
   }
 
   getRaceData(r: number): string[] {
-    let o: RaceDataJson = this.getRaceDataJson(r);
+    const o: RaceDataJson = this.getRaceDataJson(r);
     return this.convertRaceDataJson(o);
   }
 
   convertRaceDataJson(o: RaceDataJson): string[] {
-    let a: string[] = [];
+    const a: string[] = [];
 
-    for (let s of o.FinishInfo)
+    for (const s of o.FinishInfo)
       a.push(s);
 
-    for (let s of o.TimingInfo)
+    for (const s of o.TimingInfo)
       a.push(s);
 
-    for (let s of o.PenaltyInfo)
+    for (const s of o.PenaltyInfo)
       a.push(s);
 
     return a;
   }
 
   getEventData(): string[] {
-    let o: EventDataJson = this.getEventDataJson();
+    const o: EventDataJson = this.getEventDataJson();
     return this.convertEventDataJson(o, false);
   }
 
   convertEventDataJson(o: EventDataJson, includeEmptyList: boolean = false): string[] {
   
-    let a: string[] = [];
+    const a: string[] = [];
 
-    for (let s of o.EventParams)
+    for (const s of o.EventParams)
       a.push(s);
 
-    for (let s of o.EventProps)
+    for (const s of o.EventProps)
       a.push(s);
 
     if (o.NameTable.length > 2 || includeEmptyList)
-      for (let s of o.NameTable)
+      for (const s of o.NameTable)
         a.push(s);
 
-    for (let s of o.StartList)
+    for (const s of o.StartList)
       a.push(s);
 
     if (o.FleetList.length > 2 || includeEmptyList)
-      for (let s of o.FleetList)
+      for (const s of o.FleetList)
         a.push(s);
 
-    for (let s of o.FinishInfo)
+    for (const s of o.FinishInfo)
       a.push(s);
 
     if (o.TimingInfo.length > 0)
-      for (let ti of o.TimingInfo)
-        for (let s of ti)
+      for (const ti of o.TimingInfo)
+        for (const s of ti)
           a.push(s);
 
     if (o.PenaltyInfo.length > 0)
-      for (let pi of o.PenaltyInfo) {
+      for (const pi of o.PenaltyInfo) {
         if (pi.length > 0)
-          for (let s of pi)
+          for (const s of pi)
             a.push(s);
       }
 

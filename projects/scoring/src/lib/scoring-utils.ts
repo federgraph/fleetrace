@@ -21,7 +21,7 @@ export class TScoringUtils {
     }
     
     static StrToIntDef(s: string, d: number): number {
-        const n = Number.parseInt(s);
+        const n = Number.parseInt(s, 10);
         if (n === Number.NaN)
             return d;
 

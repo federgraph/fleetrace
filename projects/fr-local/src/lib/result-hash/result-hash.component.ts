@@ -51,11 +51,11 @@ export class ResultHashComponent implements OnInit {
   }
   
   getMsgList(SL: TStringList): string {
-    let cl = this.BOManager.BO.EventNode.Collection;
+    const cl = this.BOManager.BO.EventNode.Collection;
     let cr: TEventRowCollectionItem;
-    var v0: number;
-    var v1: number;
-    for (var i = 0; i < cl.Count; i++) {
+    let v0: number;
+    let v1: number;
+    for (let i = 0; i < cl.Count; i++) {
       cr = cl.Items[i];
       if (cr.PLZ >= 0) {
         cr = cl.Items[cr.PLZ];
@@ -79,16 +79,16 @@ export class ResultHashComponent implements OnInit {
   }
 
   checkMsgList(SL: TStringList): boolean {
-    var ML: TStringList;
-    var b1: number;
-    var b2: number;
-    var p1: number;
-    var p2: number;
+    let ML: TStringList;
+    let b1: number;
+    let b2: number;
+    let p1: number;
+    let p2: number;
 
-    SL.Clear;
+    SL.Clear();
     this.getMsgList(SL);
 
-    var result = true;
+    let result = true;
     this.CompareMsg = 'Check OK';
     this.ComparedOK = true;
     ML = this.BOManager.BO.ExcelImporter.CompareList;
@@ -97,19 +97,19 @@ export class ResultHashComponent implements OnInit {
       this.CompareMsg = 'Original CompareList (ML) is empty.';
       return result;
     }
-    else if (ML.Count != this.BOManager.BO.BOParams.StartlistCount) {
+    else if (ML.Count !== this.BOManager.BO.BOParams.StartlistCount) {
       result = false;
       this.CompareMsg = 'CompareList.Count does not match StartList.Count.';
       return result;
     }
-    else if (ML.Count == SL.Count) {
-      for (var i = 0; i < SL.Count; i++) {
+    else if (ML.Count === SL.Count) {
+      for (let i = 0; i < SL.Count; i++) {
         b1 = TUtils.StrToIntDef(SL.KeyFromIndex(i), -1);
         b2 = TUtils.StrToIntDef(ML.KeyFromIndex(i), -1);
-        if (b1 == b2) {
+        if (b1 === b2) {
           p1 = TUtils.StrToIntDef(SL.ValueFromIndex(i), -1);
           p2 = TUtils.StrToIntDef(ML.ValueFromIndex(i), -1);
-          if (p1 != p2) {
+          if (p1 !== p2) {
             result = false;
             SL.Update(i, `${i}: ${ML.Items(i)} : ${SL.Items(i)}`);
             this.CompareMsg = `Points mismatch at Index ${i}`;
@@ -130,9 +130,9 @@ export class ResultHashComponent implements OnInit {
   }
 
   getMemoString(): string {
-    var b: boolean;
-    let SL = new TStringList();
-    this.CL.Clear;
+    let b: boolean;
+    const SL = new TStringList();
+    this.CL.Clear();
     this.getMsgList(this.CL);
     SL.Add('');
     b = this.checkMsgList(this.CL);
@@ -141,7 +141,7 @@ export class ResultHashComponent implements OnInit {
     else
       SL.Add('CompareList-Check failed - ' + this.CompareMsg);
 
-    for (var i = 0; i < this.CL.Count; i++)
+    for (let i = 0; i < this.CL.Count; i++)
       SL.Add(this.CL.Items(i));
 
     return SL.Text;

@@ -32,13 +32,13 @@ export class FormEventParamsComponent implements OnInit {
       params: this.fb.group(new EventParams, Validators.required),
     });
 
-    this.form.get('params.raceCount').setValidators([Validators.required, Validators.min(1), Validators.max(20)])
-    this.form.get('params.itCount').setValidators([Validators.required, Validators.min(0), Validators.max(12)])
-    this.form.get('params.startlistCount').setValidators([Validators.required, Validators.min(2), Validators.max(120)])
+    this.form.get('params.raceCount').setValidators([Validators.required, Validators.min(1), Validators.max(20)]);
+    this.form.get('params.itCount').setValidators([Validators.required, Validators.min(0), Validators.max(12)]);
+    this.form.get('params.startlistCount').setValidators([Validators.required, Validators.min(2), Validators.max(120)]);
   }
 
   patch() {
-    let bop = this.BOManager.BO.BOParams;
+    const bop = this.BOManager.BO.BOParams;
     this.formData.createOption = 0;
     this.formData.raceCount = bop.RaceCount;    
     this.formData.itCount = bop.ITCount;

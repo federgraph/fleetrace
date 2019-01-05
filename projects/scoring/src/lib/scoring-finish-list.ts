@@ -9,7 +9,7 @@ export class TFinishList extends Array<TFinish> {
         Object.setPrototypeOf(this, TFinishList.prototype);
     }
 
-	/**
+    /**
     * returns a finish if found, otherwise null
     */
     findEntry(e: TEntry): TFinish {

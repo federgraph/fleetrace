@@ -191,7 +191,7 @@ export class TEventBO extends TBaseColBO<
         if (cr != null) {
             let i: number;
             try {
-                i = Number.parseInt(ColName.substring(5));
+                i = Number.parseInt(ColName.substring(5), 10);
             }
             catch
             {

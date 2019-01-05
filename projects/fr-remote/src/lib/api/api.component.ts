@@ -13,7 +13,7 @@ Pull RJ = using RaceDataJson from api/race-data-json
 
 Clear = calling /api/manage-clear
 cls = clear TestOutput variable
-`
+`;
 
 const post_button_row_legend = `
 --- post-button-row ---
@@ -25,7 +25,7 @@ RD = posting RaceDataJSON to a/pi/rd.json
 
 UD 2 = posting EventDataJSON to /ud/2
 UD 3 = posting RaceDataJSON to /ud/3
-`
+`;
 
 const inspect_button_row_legend = ` 
 --- test-button-row ---
@@ -38,7 +38,7 @@ rd.json = show RaceDataJson from /api/rd.json
 
 ud/2 = show EventDataJson from /ud/2
 ud/3 = show RaceDataJson from /ud/3
-`
+`;
 
 const backup_button_row_legend = ` 
 --- backup-button-row ---
@@ -51,7 +51,7 @@ l = show string from /api/backlog-string
 b + l = show string from /api/backup-and-log-string
 
 (b+l).json = show string from /api/backup-and-log-json-string
-`
+`;
 
 @Component({
   selector: 'fr-api',
@@ -87,7 +87,7 @@ export class ApiComponent implements OnInit {
 
   onEventDataStringAvailable(data: string) {
     if (data !== "") {
-      let ed: IEventDataItem = new IEventDataItem();
+      const ed: IEventDataItem = new IEventDataItem();
       ed.EventName = 'Current Event (pulled via api)';
       ed.EventData = data;
       this.TestOutput = 'emitting event data ...';      
@@ -99,15 +99,15 @@ export class ApiComponent implements OnInit {
   }
 
   onEventDataJsonAvailable(data: EventDataJson) {
-    let ML = new TStringList();
+    const ML = new TStringList();
     ML.SL = this.jsonInfo.convertEventDataJson(data);
     this.onEventDataStringAvailable(ML.Text);
   }
   
   onRaceDataJsonAvailable(data: RaceDataJson) {
-    let ML = new TStringList();
+    const ML = new TStringList();
     ML.SL = this.jsonInfo.convertRaceDataJson(data);
-    this.raceDataAvailable.emit(ML.SL)
+    this.raceDataAvailable.emit(ML.SL);
   }
 
   // --- consume-button-row ---
@@ -143,37 +143,37 @@ export class ApiComponent implements OnInit {
 
   pushEJ() {
     this.Info = "posting EventDataJSON to api/event-data-json";
-    let t = this.jsonInfo.getEventDataJson();
+    const t = this.jsonInfo.getEventDataJson();
     this.apiService.pushEJ(t).subscribe(data => this.TestOutput = data.retvalue);    
   }
 
   pushRJ() {
     this.Info = `posting RaceDataJSON for race ${this.race} to api/race-data-json`;
-    let t: RaceDataJson = this.jsonInfo.getRaceDataJson(this.race);
+    const t: RaceDataJson = this.jsonInfo.getRaceDataJson(this.race);
     this.apiService.pushRJ(this.race, t).subscribe(data => this.TestOutput = data.retvalue);
   }
 
   pushED() {
     this.Info = "posting EventDataJSON to api/ed.json";
-    let t = this.jsonInfo.getEventDataJson();
+    const t = this.jsonInfo.getEventDataJson();
     this.apiService.pushED(t).subscribe(data => this.TestOutput = data.retvalue);    
   }
 
   pushRD() {
     this.Info = `posting RaceDataJSON for race ${this.race} to api/rd.json`;
-    let t: RaceDataJson = this.jsonInfo.getRaceDataJson(this.race);
+    const t: RaceDataJson = this.jsonInfo.getRaceDataJson(this.race);
     this.apiService.pushRD(t).subscribe(data => this.TestOutput = data.retvalue);
   }
 
   push2() {
     this.Info = "posting EventDataJSON to ud/2";
-    let t = this.jsonInfo.getEventDataJson();
+    const t = this.jsonInfo.getEventDataJson();
     this.apiService.push2(t).subscribe(data => this.TestOutput = data.retvalue);
   }
 
   push3() {
     this.Info = `posting RaceDataJSON for race ${this.race} to ud/3`;
-    let t: RaceDataJson = this.jsonInfo.getRaceDataJson(this.race);
+    const t: RaceDataJson = this.jsonInfo.getRaceDataJson(this.race);
     this.apiService.push3(t).subscribe(data => this.TestOutput = data.retvalue);
   }
 

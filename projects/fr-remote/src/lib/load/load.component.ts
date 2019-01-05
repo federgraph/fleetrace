@@ -66,7 +66,7 @@ export class LoadComponent implements OnInit {
         this.EventData = TTestData.DefaultExample;         
         this.ok = true;
         this.TestOutput = this.EventData;    
-        this.Info = 'default example retrieved from static variable.'
+        this.Info = 'default example retrieved from static variable.';
       break;
 
       case this.loSession:        
@@ -82,7 +82,7 @@ export class LoadComponent implements OnInit {
           this.ok = true;
           this.EventData = t;
           this.TestOutput = this.EventData;    
-          this.Info = this.keyString + ' retrieved from session storage'
+          this.Info = this.keyString + ' retrieved from session storage';
           this.openSnackBar(this.Info);
         }
       break;
@@ -100,7 +100,7 @@ export class LoadComponent implements OnInit {
           this.ok = true;
           this.EventData = t;
           this.TestOutput = this.EventData;    
-          this.Info = this.keyString + ' retrieved from local storage'
+          this.Info = this.keyString + ' retrieved from local storage';
           this.openSnackBar(this.Info);
         }
       break;

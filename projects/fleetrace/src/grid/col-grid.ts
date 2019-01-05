@@ -990,9 +990,9 @@ export abstract class TColGrid<
   }
 
   lookupCR(rd: N, ARow: number) {
-    let cpBaseID = this.ColsActive.GetByName('col_BaseID');
+    const cpBaseID = this.ColsActive.GetByName('col_BaseID');
     if (cpBaseID) {
-      let BaseID = TUtils.StrToIntDef(this.Grid.GetCells(cpBaseID.Index, ARow), -1);
+      const BaseID = TUtils.StrToIntDef(this.Grid.GetCells(cpBaseID.Index, ARow), -1);
       if (BaseID >= 0) {
         if (rd.Collection) {
           return rd.Collection.FindBase(BaseID);
@@ -1007,7 +1007,7 @@ export abstract class TColGrid<
    * @param ARow 
    */
   lookupCR_fast(rd: N, ARow: number): I {
-    let BaseID = TUtils.StrToIntDef(this.Grid.GetCells(0, ARow), -1);
+    const BaseID = TUtils.StrToIntDef(this.Grid.GetCells(0, ARow), -1);
     return rd.Collection.FindBase(BaseID);
   }
 

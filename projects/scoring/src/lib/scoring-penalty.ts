@@ -199,7 +199,7 @@ export class TRSPenalty {
         if (pen.endsWith("%")) {
             const pctPen: TRSPenalty = new TRSPenalty(Constants.SCP);
             try {
-                const pct: number = Number.parseInt(pen.substring(0, pen.length - 2));
+                const pct: number = Number.parseInt(pen.substring(0, pen.length - 2), 10);
                 pctPen.Percent = pct;
             }
             catch (ex) {
@@ -211,7 +211,7 @@ export class TRSPenalty {
         if (pen.startsWith("P")) {
             const pctPen: TRSPenalty = new TRSPenalty(Constants.SCP);
             try {
-                const pct: number = Number.parseInt(pen.substring(1));
+                const pct: number = Number.parseInt(pen.substring(1), 10);
                 pctPen.Percent = pct;
                 return pctPen;
             }
@@ -245,7 +245,7 @@ export class TRSPenalty {
             const penalty: TRSPenalty = new TRSPenalty(Constants.SCP);
             // assume is form "SCP/<pts>"
             try {
-                const pct: number = Number.parseInt(val);
+                const pct: number = Number.parseInt(val, 10);
                 penalty.Percent = pct;
             }
             catch (ex) {

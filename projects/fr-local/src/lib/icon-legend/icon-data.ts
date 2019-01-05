@@ -38,7 +38,7 @@ export class IconData {
             case IconColor.Primary: return "primary";
             case IconColor.Accent: return "accent";
             case IconColor.Warn: return "warn";
-            default: return "primary"
+            default: return "primary";
         }
     }
 
@@ -59,9 +59,9 @@ export class IconData {
     }
 
     static readIconData(source: (string | IconEnum | IconColor | IconAction)[][]) {
-        let a: IconData[] = [];
+        const a: IconData[] = [];
         for (let i = 0; i < source.length; i++) {
-            let cr = source[i];
+            const cr = source[i];
             const id: IconData = new IconData();
             id.EnumValue = cr[0] as IconEnum;
             id.Meaning = cr[1] as string;
@@ -134,11 +134,11 @@ export const ExplorerbarIcons = [
     [IconEnum.maximize, 'Maximize', IconAction.Toggle, IconColor.Accent, 'toggleExplorerBar()'],
     [IconEnum.dashboard, 'Panel', IconAction.Show, IconColor.Normal, 'toggleButtonPanel()'],
     [IconEnum.camera, 'Icon Legend', IconAction.Toggle, IconColor.Primary, ''],
-]
+];
 
 export const CheckbarIcons = [
     [IconEnum.cached, 'Try Toggle Strict', IconAction.Execute, IconColor.Normal, 'tryToggleStrict()'],
-]
+];
 
 export const EditbarIcons = [
     [IconEnum.check_box_outline_blank, 'Timing Options', IconAction.Toggle, IconColor.Primary, 'toggleChecks()'],
@@ -151,17 +151,17 @@ export const EditbarIcons = [
     [IconEnum.attach_file, 'Use Queue', IconAction.Toggle, IconColor.Accent, 'toggleUseQueue()'],
     [IconEnum.toys, 'gen msg for bib', IconAction.Execute, IconColor.Primary, 'generateMsg()'],
     [IconEnum.camera, 'toggle legend', IconAction.Toggle, IconColor.Normal, 'toggleInputLegend()'],
-]
+];
 
 export const MsgEdit1Icons = [
     [IconEnum.send, 'Send Message 1', IconAction.Toggle, IconColor.Normal, 'send1()'],
     [IconEnum.short_text, 'Prepare bar', IconAction.Toggle, IconColor.Normal, 'togglePreparBar()'],
-]
+];
 
 export const MsgEdit2Icons = [
     [IconEnum.send, 'Send Message 2 to Event', IconAction.Toggle, IconColor.Normal, 'send2()'],
     [IconEnum.clear, 'Clear Input field 2', IconAction.Toggle, IconColor.Normal, 'clearInput2()'],
-]
+];
 
 export const PreparebarIcons = [
     [IconEnum.person, 'SNR assignment', IconAction.Execute, IconColor.Normal, 'prepareSNR()'],
@@ -169,7 +169,7 @@ export const PreparebarIcons = [
     [IconEnum.panorama, 'Name update', IconAction.Execute, IconColor.Normal, 'prepareNC()'],
     [IconEnum.star, 'Race Value message', IconAction.Execute, IconColor.Normal, 'prepareRV()'],
     [IconEnum.star_border, 'Quit packet', IconAction.Execute, IconColor.Normal, 'prepareQU()'],
-]
+];
 
 export const TextAreaIcons = [
     [IconEnum.clear, 'clear', IconAction.Hide, IconColor.Normal, 'memoClear()'],
@@ -180,7 +180,7 @@ export const TextAreaIcons = [
     [IconEnum.send, 'read data and create new event', IconAction.Execute, IconColor.Accent, 'memoText(true)'],
     [IconEnum.share, 'copy to clipboard', IconAction.Execute, IconColor.Normal, 'memoCopy(memo)'],
     [IconEnum.camera, 'toggle legend', IconAction.Toggle, IconColor.Normal, 'toggleTextAreaLegend()'],
-]
+];
 
 export const PreTextIcons = [
     [IconEnum.clear, 'clear', IconAction.Hide, IconColor.Normal, 'clearTextOutput()'],
@@ -190,7 +190,7 @@ export const PreTextIcons = [
     [IconEnum.save, 'compact text', IconAction.Show, IconColor.Primary, 'getTxtBackup(true)'],
     [IconEnum.share, 'copy compact text', IconAction.Execute, IconColor.Primary, 'copyCompact()'],
     [IconEnum.camera, 'toggle legend', IconAction.Toggle, IconColor.Normal, 'togglePreTextLegend()'],
-]
+];
 
 export const EventIcons = [
     [IconEnum.delete, 'clear result data (debug)', IconAction.Execute, IconColor.Normal, 'clear()'],
@@ -202,7 +202,7 @@ export const EventIcons = [
     [IconEnum.brush, 'fleet color mode, shows fleet assignment', IconAction.Show, IconColor.Accent, 'colorBtnClick(3)'],
     [IconEnum.sort, 'reset to default sort order (debug)', IconAction.Execute, IconColor.Primary, 'sortOrderClear()'],
     [IconEnum.camera, 'toggle legend', IconAction.Toggle, IconColor.Normal, 'toggleLegend()'],
-]    
+];    
 
 export const RaceIcons = [
     [IconEnum.delete, 'clear', IconAction.Execute, IconColor.Normal, 'clearRace()'],
@@ -212,7 +212,7 @@ export const RaceIcons = [
     [IconEnum.sort, 'reset sort order', IconAction.Execute, IconColor.Primary, 'sortOrderClear()'],
     [IconEnum.texture, 'layout', IconAction.Toggle, IconColor.Normal, 'toggleLayout()'],
     [IconEnum.camera, 'legend', IconAction.Toggle, IconColor.Normal, 'toggleLegend()'],
-]    
+];    
 
 export const EntriesIcons = [
     [IconEnum.delete_outline, 'empty table, delete all rows', IconAction.Execute, IconColor.Normal, 'empty()'],
@@ -223,4 +223,4 @@ export const EntriesIcons = [
     [IconEnum.remove, 'delete last row', IconAction.Toggle, IconColor.Normal, 'popEntry()'],
     [IconEnum.sort, 'reset sort order (debug)', IconAction.Execute, IconColor.Normal, 'sortOrderClear()'],
     [IconEnum.camera, 'legend', IconAction.Toggle, IconColor.Normal, 'toggleLegend()'],
-]    
+];    

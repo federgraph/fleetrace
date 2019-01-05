@@ -18,7 +18,7 @@ export class FormEventPropsQuickComponent implements OnInit {
 
   @Output() propsChanged: EventEmitter<EventProps> = new EventEmitter();
 
-  system = 0
+  system = 0;
   schema = 0;
 
   eventName: string = "Event Name";
@@ -35,7 +35,7 @@ export class FormEventPropsQuickComponent implements OnInit {
   }
 
   reset() {
-    let formData = new EventProps();
+    const formData = new EventProps();
     this.eventName = formData.eventName;
     this.scoringSystem = formData.scoringSystem;
     this.schemaCode = formData.schemaCode;
@@ -43,7 +43,7 @@ export class FormEventPropsQuickComponent implements OnInit {
   }
 
   patch() {    
-    let ep = this.BOManager.BO.EventProps;
+    const ep = this.BOManager.BO.EventProps;
     this.eventName = ep.EventName;
     this.scoringSystem = ep.ScoringSystem;
     this.schemaCode = ep.SchemaCode;

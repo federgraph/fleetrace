@@ -33,7 +33,7 @@ export class TExcelExporter
                 case TableID.FleetList: this.GetFleetList(BO); break;
                 case TableID.FinishList: this.GetFinishList(BO); break;
                 case TableID.ResultList: this.GetResultList(BO); break;
-				case TableID.CaptionList: this.GetCaptionList(); break;
+                case TableID.CaptionList: this.GetCaptionList(); break;
             }
         }
 
@@ -114,26 +114,26 @@ export class TExcelExporter
                     }
                     break;
 
-				case TableID.CaptionList:
-					Memo.Add(TableToken.CaptionListStart);
-					this.GetCaptionList();
-					this.CopyLines(Memo);
-					Memo.Add(TableToken.CaptionListEnd);
-					break;
+                case TableID.CaptionList:
+                    Memo.Add(TableToken.CaptionListStart);
+                    this.GetCaptionList();
+                    this.CopyLines(Memo);
+                    Memo.Add(TableToken.CaptionListEnd);
+                    break;
 
             }
         }
 
-        AddLines(TableID: number, BO: TBO, Memo:TStringList): void
+        AddLines(tableID: number, BO: TBO, Memo:TStringList): void
         {
-            this.FillTable(TableID, BO);
+            this.FillTable(tableID, BO);
             for (let i = 0; i < this.SL.Count; i++)
                 Memo.Add(this.SL.Items(i));
         }
 
-        GetString(TableID: number, BO: TBO): string
+        GetString(tableID: number, BO: TBO): string
         {
-            this.FillTable(TableID, BO);
+            this.FillTable(tableID, BO);
             return this.SL.Text;
         }
 
@@ -420,13 +420,13 @@ export class TExcelExporter
 
         }
 
-		GetCaptionList(): void
-		{
-			this.SL.Clear();
-			this.SLToken.Clear();
-			this.SLToken.Delimiter = this.Delimiter;
-			this.SL.Text = TColCaptions.ColCaptionBag.Text;
-		}
+        GetCaptionList(): void
+        {
+            this.SL.Clear();
+            this.SLToken.Clear();
+            this.SLToken.Delimiter = this.Delimiter;
+            this.SL.Text = TColCaptions.ColCaptionBag.Text;
+        }
 
     }
 

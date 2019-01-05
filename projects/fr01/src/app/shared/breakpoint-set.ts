@@ -54,7 +54,7 @@ export class BreakpointSet {
   }
 
   all(): Array<string> {
-    let result = [
+    const result = [
       Breakpoints.XSmall,
       Breakpoints.Small,
       Breakpoints.Medium,

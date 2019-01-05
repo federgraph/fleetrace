@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges, OnChanges } from '@angular/core';
 import { TBOManager } from 'fleetrace';
 import { TEventRaceEntry } from 'fleetrace';
 
@@ -7,7 +7,7 @@ import { TEventRaceEntry } from 'fleetrace';
   templateUrl: './bib.component.html',
   styleUrls: ['./bib.component.css']
 })
-export class BibComponent implements OnInit {
+export class BibComponent implements OnInit, OnChanges {
 
   @Input() bib: number = 0;
 
@@ -35,7 +35,7 @@ export class BibComponent implements OnInit {
   }
 
   update() {
-    let cr = this.BOManager.BO.EventNode.FindBib(this.bib);
+    const cr = this.BOManager.BO.EventNode.FindBib(this.bib);
     if (!cr)
       this.clear();
     else {
@@ -47,7 +47,7 @@ export class BibComponent implements OnInit {
       for (let r = 1; r < cr.Race.length; r++) {
         ere = cr.Race[r];
         if (r > 1)
-          t += '-'
+          t += '-';
         //t += ere.OTime;
         t += ere.RaceValue;
       }

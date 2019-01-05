@@ -153,7 +153,7 @@ export class TUtils {
       }
   
     static StrToIntDef(value: string, defaultResult: number) {
-        let i = Number.parseInt(value);
+        let i = Number.parseInt(value, 10);
         if (Number.isNaN(i))
             i = defaultResult;
         return i;

@@ -306,8 +306,8 @@ export class TExcelImporter {
     }
 
     public SetValue_CompareList(f: string, v: string): void {
-        let b = TUtils.StrToIntDef(f, -1);
-        let p = TUtils.StrToIntDef(v, -1);
+        const b = TUtils.StrToIntDef(f, -1);
+        const p = TUtils.StrToIntDef(v, -1);
         this.CompareList.Add(`${b}=${p}`); //Format('%.3d=%.5d', [b, p]));      
     }
 

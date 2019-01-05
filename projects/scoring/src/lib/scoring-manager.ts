@@ -54,7 +54,7 @@ export class TScoringManager {
         let newModel: IScoringModel;
         if (value === 1) //"Bonus Point"
             newModel = new TScoringBonusPoint();
-        else if (value == 2) //"Bonus Point DSV"
+        else if (value === 2) //"Bonus Point DSV"
             newModel = new TScoringBonusPointDSV();
         else //if (value == 0)
             newModel = new TScoringLowPoint();
