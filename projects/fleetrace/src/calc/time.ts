@@ -212,7 +212,7 @@ export class TNTime {
             dotpos = TimeStr.lastIndexOf('.');
         }
 
-        // Bemerkung: lastcolon und dotpos werden beide auf den Dezimalpunktes gestellt
+        // Bemerkung: lastcolon und dotpos werden beide auf die Position des Dezimalpunktes gestellt
         // dotpos wird von hier ab nicht mehr verändert
         if ((lastcolon === -1) && (dotpos > 0))
             lastcolon = dotpos; // es war ein Komma
@@ -243,7 +243,7 @@ export class TNTime {
         return true;
     }
     
-    /** Will place a zero in front of one digit numbers */
+    /** Will place a zero in front of one-digit numbers */
     private EnsureLeadingZero(value: number): string {
         if (value < 10)
             return "0" + value.toString();

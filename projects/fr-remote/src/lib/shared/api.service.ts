@@ -337,10 +337,10 @@ export class ApiService {
 
   /**
    * Trigger generation of time and/or  finish position on server.
-   * But this version does not do status uodates and it cannot do erasures.
+   * (This variation does not do status updates and it cannot do erasures.)
    * */
   getTimingEventQuick(race: number, it: number, bib: number, option: number): Observable<string> {
-    return this.http.get(`/api/widget/do-timeing-event-quick?race=${race}&it=${it}&bib=${bib}`, {responseType: 'text'});
+    return this.http.get(`/api/widget/do-timing-event-quick?race=${race}&it=${it}&bib=${bib}`, {responseType: 'text'});
   }
 
   private handleError(error: HttpErrorResponse) {

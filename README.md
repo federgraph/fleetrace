@@ -2,19 +2,15 @@
 
 This is an Angular/Typescript workspace.
 
-I am new to GitHub, new to developing Angular applications, and I will upload the initial code step by step.
-
 Code is at version 0.0.1, considered Alpha.
 
 ## scoring lib
 
-This is the 'javascore compatible' scoring code.
+This is 'javascore compatible' scoring code.
 
 It implements the Racing Rules Of Sailing, Appendix A - Scoring.
 
-JavaScore always had an GPL license. I looked hard into the javascore project a long time ago, and ported some of the core scoring logic to Delphi and  C#.
-
-I do not want to reinvent the wheel, and I appreciate the work that was done in the javascore project as the original source for series scoring.
+JavaScore always had an GPL license. I looked hard into the javascore project a long time ago (2004) and ported some of the core scoring logic to Delphi and  C#.
 
 ## fleetrace lib
 
@@ -39,8 +35,6 @@ You can use ng serve fr01 to see FR01 application in Chrome and debug with dev-t
 (This is where you are expected to start exploring.)
 
 ## How to build
-
-(Later, when I have uploaded the code, do this:)
 
 - First run `ng build scoring` to build the scoring library.
 - Next run `ng build fleetrace` to build the fleetrace library.
