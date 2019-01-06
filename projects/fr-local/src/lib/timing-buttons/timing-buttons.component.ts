@@ -11,9 +11,9 @@ import { TBOManager, TEventRowCollectionItem, TRaceRowCollectionItem } from 'fle
 export class TimingButtonsComponent implements OnInit {
     _ba: Array<number> = [];
 
-    @Output() onSendMsg: EventEmitter<string> = new EventEmitter();
-    @Output() onUpdateAll: EventEmitter<number> = new EventEmitter();
-    @Output() onCalc: EventEmitter<number> = new EventEmitter();
+    @Output() sendMsg: EventEmitter<string> = new EventEmitter();
+    @Output() updateAll: EventEmitter<number> = new EventEmitter();
+    @Output() calc: EventEmitter<number> = new EventEmitter();
 
     BowTupples: Array<[number, boolean]>;
     Bows: Array<number> = [];
@@ -349,16 +349,16 @@ export class TimingButtonsComponent implements OnInit {
             }
             else {
                 this.BOManager.BO.Dispatch(tr);
-                this.onSendMsg.emit(tr);
+                this.sendMsg.emit(tr);
 
                 if (te !== "" && this.WantUpdateEvent) {
                     this.BOManager.BO.Dispatch(te);
-                    this.onSendMsg.emit(te);
+                    this.sendMsg.emit(te);
                 }
 
                 // this.calcRace();
                 // this.calcEvent();
-                this.onCalc.emit(0);
+                this.calc.emit(0);
             }
         }
 
@@ -375,16 +375,16 @@ export class TimingButtonsComponent implements OnInit {
             if (!b1)
                 console.log('could not dispatch msg 1: ' + this.InputMsgText1);
             else
-                this.onSendMsg.emit(this.InputMsgText1);
+                this.sendMsg.emit(this.InputMsgText1);
         }
         if (this.InputMsgText2 !== "" && this.WantUpdateEvent) {
             const b2 = this.BOManager.BO.Dispatch(this.InputMsgText2);
             if (!b2)
                 console.log('could not dispatch msg 2: ' + this.InputMsgText2);
             else
-                this.onSendMsg.emit(this.InputMsgText2);
+                this.sendMsg.emit(this.InputMsgText2);
         }
-        this.onUpdateAll.emit(0);
+        this.updateAll.emit(0);
         this.update();
     }
 
@@ -394,7 +394,7 @@ export class TimingButtonsComponent implements OnInit {
             if (!b2)
                 console.log('could not dispatch msg 2: ' + this.InputMsgText2);
         }
-        this.onUpdateAll.emit(0);
+        this.updateAll.emit(0);
         this.update();
     }
 
@@ -450,22 +450,22 @@ export class TimingButtonsComponent implements OnInit {
         while (this.BOManager.BO.msgQueueR.length > 0) {
             msg = this.BOManager.BO.msgQueueR.pop();
             this.BOManager.BO.Dispatch(msg);
-            this.onSendMsg.emit(msg);
+            this.sendMsg.emit(msg);
         }
 
         while (this.BOManager.BO.msgQueueE.length > 0) {
             msg = this.BOManager.BO.msgQueueE.pop();
             if (msg !== "" && this.WantUpdateEvent) {
                 this.BOManager.BO.Dispatch(msg);
-                this.onSendMsg.emit(msg);
+                this.sendMsg.emit(msg);
             }
         }
 
-        this.onUpdateAll.emit(1);
+        this.updateAll.emit(1);
     }
 
     showQueue() {
-        this.onUpdateAll.emit(2);
+        this.updateAll.emit(2);
     }
 
     get QueueIsEmpty(): boolean {

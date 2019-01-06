@@ -122,9 +122,9 @@
         </ng-container>
 
         <fr-timing-buttons *ngIf=InputVisible #timingTab
-            (onSendMsg)="sendMsg($event)" 
-            (onUpdateAll)="handleUpdate($event)"
-            (onCalc)="handleCalc($event)"></fr-timing-buttons>
+            (sendMsg)="sendMsg($event)" 
+            (updateAll)="handleUpdate($event)"
+            (calc)="handleCalc($event)"></fr-timing-buttons>
 
         <ng-container *ngIf=TextAreaVisible>
             <h2>Text Area</h2>
