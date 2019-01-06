@@ -27,42 +27,9 @@
 
     <div class="real-content">
 
-        <div class="button-row">
-
-            <!-- <button mat-raised-button (click)="reduceToParams()">Params</button> -->
-            <!-- <button mat-raised-button (click)="reduceToProps()">Props</button> -->
-            <!-- <button mat-raised-button (click)="reduceToEntry()">Entry</button> -->
-
-            <button mat-raised-button (click)="reduceToPreText()">Pre Text</button>
-            <button mat-raised-button (click)="reduceToTextArea()">Text Area</button>
-            <!-- <button mat-raised-button (click)="reduceToJsonInfo()">Json Info</button> -->
-
-            <!-- <button mat-raised-button (click)="reduceToAssetMenu()">Asset Menu</button> -->
-            <!-- <button mat-raised-button (click)="reduceToEventMenu()">Event Menu</button> -->
-
-            <!-- <button mat-raised-button (click)="reduceToSave()">Save</button> -->
-            <!-- <button mat-raised-button (click)="reduceToLoad()">Load</button> -->
-
-            <!-- <button mat-raised-button *ngIf="LinkBtnVisible" (click)="toggleConn()">Conn</button> -->
-
-            <button mat-raised-button (click)="toggleExplorerLine()">ExplorerLine</button>
-            <button mat-raised-button (click)="toggleBigButtonRow()">BBR</button>
-            <button mat-raised-button (click)="toggleDebug()">Debug</button>
-
-            <!-- <button mat-raised-button (click)="autoLoad()">Auto Load</button> -->
-            <!-- <button mat-raised-button (click)="autoSave()">Auto Save</button> -->
-
-            <button mat-raised-button (click)="enableRaceBtnClick()">ER</button>
-            <!-- <button mat-raised-button (click)="clearTimepointBtnClick()">CTP</button>
-            <button mat-raised-button (click)="clearRaceBtnClick()">CR</button>
-            <button mat-raised-button (click)="clearBtnClick()">CE</button> -->
-            <button mat-raised-button (click)="updateEvent()">UE</button>
-        </div>
-
         <pre *ngIf="ExplorerLineVisible">--- <span class="color-accent">Race {{CurrentRace}}</span> --- <span class="color-primary">IT {{CurrentTP}}</span> --- Bib {{CurrentBib}} ---</pre>
 
         <ng-container *ngIf="ButtonPanelVisible">
-            <h2>Panel</h2>
 
             <div class="button-line">
                 <button mat-stroked-button color="primary" [disabled]="true" (click)="toggleButtonPanel()">Icons</button>
@@ -169,6 +136,33 @@
 
         <fr-form-event-params-quick *ngIf="ParamsVisible" (paramsChanged)="onParamsChanged($event)"></fr-form-event-params-quick>
         <fr-form-event-props-quick *ngIf="PropsVisible" (propsChanged)="onPropsChanged($event)"></fr-form-event-props-quick>
+
+        <fr-json-info *ngIf="JsonInfoVisible"></fr-json-info>
+
+        <p></p>
+        
+        <h2>Other Buttons</h2>
+
+        <div class="button-row">
+            <button mat-raised-button (click)="reduceToPreText()">Show Pre Text</button>
+            <button mat-raised-button (click)="reduceToTextArea()">Show Text Area</button>
+            <button mat-raised-button (click)="reduceToJsonInfo()">Show Json Info</button>
+        </div>
+
+        <div class="button-row">
+            <button mat-raised-button (click)="toggleExplorerLine()">Toggle ExplorerLine</button>
+            <button mat-raised-button (click)="toggleBigButtonRow()">Toggle BBR</button>
+            <button mat-raised-button (click)="toggleDebug()">Toggle Debug Flag</button>
+        </div>
+
+        <div class="button-row">
+            <button mat-raised-button (click)="enableRaceBtnClick()">Enable/Disable Current Race</button>
+            <button mat-raised-button (click)="updateEvent()">Update Event (from Race)</button>
+        </div>
+
+        <p></p>
+        
+        <p>We are still working on the UI, are we?</p>
 
     </div>
 
