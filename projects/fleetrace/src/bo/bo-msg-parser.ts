@@ -18,20 +18,6 @@ export enum TCommandPathError {
     Error_Option
 }
 
-const CommandPathErrorStrings: Array<string> = [ // new Array<string>(TCommandPathError)
-    'Error_None',
-    'Error_TokenB',
-    'Error_TokenZ',
-    'Error_RunID',
-    'Error_Bib',
-    'Error_Command',
-    'Error_Value',
-    'Error_Pos',
-    'Error_Athlete',
-    'Error_MsgID',
-    'Error_Race'
-];
-
 export enum TMsgType {
     None,
     Input,
