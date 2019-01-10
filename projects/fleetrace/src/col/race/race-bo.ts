@@ -208,8 +208,8 @@ export class TRaceBO extends TBaseColBO<
         let maxRank = 0;
 
         let cr1: TRaceRowCollectionItem;
-        for (let i = 0; i < cl.Count; i++) {
-            cr1 = cl.Items[i];
+        for (let i1 = 0; i1 < cl.Count; i1++) {
+            cr1 = cl.Items[i1];
             if (cr === cr1)
                 continue;
             else if (cr1.MRank > 0)
@@ -229,8 +229,8 @@ export class TRaceBO extends TBaseColBO<
         if (oldRank === newRank)
             result = TUtils.IntToStr(cr.MRank);
         else {
-            for (let i = 0; i < cl.Count; i++) {
-                cr1 = cl.Items[i];
+            for (let i2 = 0; i2 < cl.Count; i2++) {
+                cr1 = cl.Items[i2];
                 if (cr1 === cr)
                     continue;
                 const temp: number = cr1.MRank;

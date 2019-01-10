@@ -101,8 +101,8 @@ export class TEventBO extends TBaseColBO<
         }
 
         const rc: number = this.RaceCount;
-        for (let i = 1; i <= rc; i++) {
-            cp = g.AddColumn("col_R" + i.toString());
+        for (let r = 1; r <= rc; r++) {
+            cp = g.AddColumn("col_R" + r.toString());
             cp.OnFinishEdit2 = this.EditRaceValue;
             cp.ReadOnly = false;
         }
@@ -217,21 +217,21 @@ export class TEventBO extends TBaseColBO<
 
             // Fleet Assignment, easy edit
             else if (value.length === 1 && this.IsFleetInputChar(value[0])) {
-                const re: TEventRaceEntry = cr.Race[i];
+                const re1: TEventRaceEntry = cr.Race[i];
                 const c: string = value[0];
                 switch (c) {
-                    case 'y': re.Fleet = 1; break; // yellow
-                    case 'b': re.Fleet = 2; break; // blue
-                    case 'r': re.Fleet = 3; break; // red
-                    case 'g': re.Fleet = 4; break; // green
-                    case 'm': re.Fleet = 0; break; // medal
+                    case 'y': re1.Fleet = 1; break; // yellow
+                    case 'b': re1.Fleet = 2; break; // blue
+                    case 'r': re1.Fleet = 3; break; // red
+                    case 'g': re1.Fleet = 4; break; // green
+                    case 'm': re1.Fleet = 0; break; // medal
                 }
             }
 
             // Fleet Assignment, general method
             else if (value.length > 1 && value[0] === 'F') {
-                const re: TEventRaceEntry = cr.Race[i];
-                re.RaceValue = value; // do not broadcast Fleet Assignments
+                const re2: TEventRaceEntry = cr.Race[i];
+                re2.RaceValue = value; // do not broadcast Fleet Assignments
                 // cr.Modified = true;
                 // Value = re.RaceValue;
             }
@@ -346,8 +346,8 @@ export class TEventBO extends TBaseColBO<
         oldRank = er.OTime;
         newRank = TUtils.StrToIntDef(value, er.OTime);
         maxRank = 0;
-        for (let i = 0; i < cl.length; i++) {
-            cr1 = cl[i];
+        for (let i1 = 0; i1 < cl.length; i1++) {
+            cr1 = cl[i1];
             er1 = cr1.Race[r];
             if (cr === cr1)
                 continue;
@@ -366,8 +366,8 @@ export class TEventBO extends TBaseColBO<
         if (oldRank === newRank)
             result = er.OTime.toString();
         else {
-            for (let i = 0; i < cl.length; i++) {
-                cr1 = cl[i];
+            for (let i2 = 0; i2 < cl.length; i2++) {
+                cr1 = cl[i2];
                 er1 = cr1.Race[r];
                 if (cr1 === cr)
                     continue;
@@ -404,8 +404,8 @@ export class TEventBO extends TBaseColBO<
         oldRank = er.OTime;
         newRank = TUtils.StrToIntDef(value, er.OTime);
         maxRank = 0;
-        for (let i = 0; i < cl.Count; i++) {
-            cr1 = cl.Items[i];
+        for (let i1 = 0; i1 < cl.Count; i1++) {
+            cr1 = cl.Items[i1];
             er1 = cr1.Race[r];
             if (cr === cr1)
                 continue;

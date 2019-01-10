@@ -209,8 +209,8 @@ export class TScoringManager {
         let rp: TRacePoints;
         // find the number of fleets in the race
         let fc = 0;
-        for (let i = 0; i < points.length; i++) {
-            rp = points[i]; // as TRacePoints;
+        for (let i1 = 0; i1 < points.length; i1++) {
+            rp = points[i1]; // as TRacePoints;
             if ((rp.Finish != null) && (rp.Finish.Fleet > fc))
                 fc = rp.Finish.Fleet;
         }
@@ -234,16 +234,16 @@ export class TScoringManager {
             // call ScoreSeries1 for each fleet
             for (let j = 0; j <= fc; j++) {
                 // get the entries for the fleet
-                for (let i = 0; i < fr.FinishList.length; i++) {
-                    f = fr.FinishList[i];
+                for (let i2 = 0; i2 < fr.FinishList.length; i2++) {
+                    f = fr.FinishList[i2];
                     e = f.Entry;
                     if (f.Fleet === j)
                         el.Add(e);
                 }
 
                 // get the racepoints for the fleet
-                for (let i = 0; i < points.length; i++) {
-                    rp = points[i];
+                for (let i3 = 0; i3 < points.length; i3++) {
+                    rp = points[i3];
                     if (rp.Finish != null) // && (rp.Finish.Fleet == j)
                         rpl.Add(rp);
                 }

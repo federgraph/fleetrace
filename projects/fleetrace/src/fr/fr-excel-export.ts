@@ -154,10 +154,10 @@ export class TExcelExporter
             // HeaderLine
             this.SLToken.Clear();
             this.SLToken.Add("SNR");
-            for (let j = 1; j <= cr.FieldCount; j++)
+            for (let j1 = 1; j1 <= cr.FieldCount; j1++)
             {
-                if (cr.GetFieldUsed(j))
-                    this.SLToken.Add("N" + j.toString());
+                if (cr.GetFieldUsed(j1))
+                    this.SLToken.Add("N" + j1.toString());
             }
             s = this.SLToken.DelimitedText;
             this.SL.Add(s);
@@ -168,11 +168,11 @@ export class TExcelExporter
                 cr = cl.Items[i];
                 this.SLToken.Clear();
                 this.SLToken.Add(cr.SNR.toString());
-                for (let j = 1; j <= cr.FieldCount; j++)
+                for (let j2 = 1; j2 <= cr.FieldCount; j2++)
                 {
-                    if (!cr.GetFieldUsed(j))
+                    if (!cr.GetFieldUsed(j2))
                         continue;
-                    this.SLToken.Add(cr.getItem(j));
+                    this.SLToken.Add(cr.getItem(j2));
                 }
                 s = this.SLToken.DelimitedText;
                 this.SL.Add(s);
@@ -262,8 +262,8 @@ export class TExcelExporter
             this.SLToken.Add("SNR");
             this.SLToken.Add("Bib");
             cr = cl.Items[0];
-            for (let r = 1; r < cr.RCount; r++)
-                this.SLToken.Add("R" + r.toString());
+            for (let r1 = 1; r1 < cr.RCount; r1++)
+                this.SLToken.Add("R" + r1.toString());
             s = this.SLToken.DelimitedText;
             this.SL.Add(s);
 
@@ -274,9 +274,9 @@ export class TExcelExporter
                 this.SLToken.Clear();
                 this.SLToken.Add(cr.SNR.toString());
                 this.SLToken.Add(cr.Bib.toString());
-                for (let r = 1; r < cr.RCount; r++)
+                for (let r2 = 1; r2 < cr.RCount; r2++)
                 {
-                    ere = cr.Race[r];
+                    ere = cr.Race[r2];
                     this.SLToken.Add(ere.OTime.toString());
                 }
                 s = this.SLToken.DelimitedText;
@@ -302,8 +302,8 @@ export class TExcelExporter
             this.SLToken.Add("SNR");
             this.SLToken.Add("Bib");
             cr = cl.Items[0];
-            for (let r = 1; r < cr.RCount; r++)
-                this.SLToken.Add("R" + r.toString());
+            for (let r1 = 1; r1 < cr.RCount; r1++)
+                this.SLToken.Add("R" + r1.toString());
             s = this.SLToken.DelimitedText;
             this.SL.Add(s);
 
@@ -314,9 +314,9 @@ export class TExcelExporter
                 this.SLToken.Clear();
                 this.SLToken.Add(cr.SNR.toString());
                 this.SLToken.Add(cr.Bib.toString());
-                for (let r = 1; r < cr.RCount; r++)
+                for (let r2 = 1; r2 < cr.RCount; r2++)
                 {
-                    ere = cr.Race[r];
+                    ere = cr.Race[r2];
                     this.SLToken.Add(ere.Fleet.toString());
                 }
                 s = this.SLToken.DelimitedText;
@@ -348,8 +348,8 @@ export class TExcelExporter
             this.SLToken.Add("N5");
             this.SLToken.Add("N6");
             cr = cl.Items[0];
-            for (let r = 1; r < cr.RCount; r++)
-                this.SLToken.Add("R" + r.toString());
+            for (let r1 = 1; r1 < cr.RCount; r1++)
+                this.SLToken.Add("R" + r1.toString());
             s = this.SLToken.DelimitedText;
             this.SL.Add(s);
 
@@ -366,9 +366,9 @@ export class TExcelExporter
                 this.SLToken.Add(cr.NC);
                 this.SLToken.Add(cr.GR);
                 this.SLToken.Add(cr.PB);
-                for (let r = 1; r < cr.RCount; r++)
+                for (let r2 = 1; r2 < cr.RCount; r2++)
                 {
-                    ere = cr.Race[r];
+                    ere = cr.Race[r2];
                     this.SLToken.Add(ere.OTime.toString());
                 }
                 s = this.SLToken.DelimitedText;
@@ -394,16 +394,16 @@ export class TExcelExporter
             this.SLToken.Add("SNR");
             this.SLToken.Add("Bib");
             cr = cl.Items[0];
-            for (let i = 1; i < cr.ITCount; i++)
-                this.SLToken.Add("IT" + i.toString());
+            for (let i1 = 1; i1 < cr.ITCount; i1++)
+                this.SLToken.Add("IT" + i1.toString());
             this.SLToken.Add("FT");
             s = this.SLToken.DelimitedText;
             this.SL.Add(s);
 
             // DataLines
-            for (let i = 0; i < cl.Count; i++)
+            for (let i2 = 0; i2 < cl.Count; i2++)
             {
-                cr = cl.Items[i];
+                cr = cl.Items[i2];
                 this.SLToken.Clear();
                 this.SLToken.Add(cr.SNR.toString());
                 this.SLToken.Add(cr.Bib.toString());

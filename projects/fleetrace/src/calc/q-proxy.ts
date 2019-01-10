@@ -75,22 +75,22 @@ export class TQProxy
 
         private Calc_ORank(): void
         {
-            for (let j = 0; j < this.Count; j++)
-                this.ORank[j] = 1;
-            for (let j = 0; j < this.Count; j++)
+            for (let j1 = 0; j1 < this.Count; j1++)
+                this.ORank[j1] = 1;
+            for (let j2 = 0; j2 < this.Count; j2++)
             {
-                const t2: number = this.OTime[j];
+                const t2: number = this.OTime[j2];
                 if (t2 <= 0)
-                    this.ORank[j] = 0;
+                    this.ORank[j2] = 0;
                 else
                 {
-                    for (let l = j + 1; l < this.Count; l++)
+                    for (let l = j2 + 1; l < this.Count; l++)
                     {
                         const t1: number = this.OTime[l];
                         if (t1 > 0)
                         {
                             if (t1 < t2)
-                                this.ORank[j] = this.ORank[j] + 1;
+                                this.ORank[j2] = this.ORank[j2] + 1;
                             if (t1 > t2)
                                 this.ORank[l] = this.ORank[l] + 1;
                         }
@@ -118,17 +118,17 @@ export class TQProxy
         {
             if (this.BestOTime === TimeConst.TimeNull)
             {
-                for (let i = 0; i < this.Count; i++)
-                    this.TimeBehind[i] = TimeConst.TimeNull;
+                for (let i1 = 0; i1 < this.Count; i1++)
+                    this.TimeBehind[i1] = TimeConst.TimeNull;
             }
             else
             {
-                for (let i = 0; i < this.Count; i++)
+                for (let i2 = 0; i2 < this.Count; i2++)
                 {
-                    if (this.OTime[i] > 0)
-                        this.TimeBehind[i] =  this.OTime[i] - this.BestOTime;
+                    if (this.OTime[i2] > 0)
+                        this.TimeBehind[i2] =  this.OTime[i2] - this.BestOTime;
                     else
-                        this.TimeBehind[i] = TimeConst.TimeNull;
+                        this.TimeBehind[i2] = TimeConst.TimeNull;
                 }
             }
         }
@@ -155,28 +155,28 @@ export class TQProxy
             let BibMerker: number; // wegen 'Highest Bib goes first'
 
             // reset
-            for (let j = 0; j < this.Count; j++)
+            for (let j1 = 0; j1 < this.Count; j1++)
             {
-                this.Rank[j] = 1;
-                this.PosR[j] = 1;
-                this.PLZ[j] = -1;
+                this.Rank[j1] = 1;
+                this.PosR[j1] = 1;
+                this.PLZ[j1] = -1;
             }
 
             // new calculation
-            for (let j = 0; j < this.Count; j++)
+            for (let j2 = 0; j2 < this.Count; j2++)
             {
-                t2 = this.OTime[j];
-                BibMerker = this.Bib[j];
+                t2 = this.OTime[j2];
+                BibMerker = this.Bib[j2];
                 // TimePresent = False
                 if (t2 <= 0)
                 {
-                    this.Rank[j] = 0;
-                    this.PosR[j] = 0;
+                    this.Rank[j2] = 0;
+                    this.PosR[j2] = 0;
                 }
-                    // TimePresent
+                // TimePresent
                 else
                 {
-                    for(let l = j + 1; l < this.Count; l++)
+                    for(let l = j2 + 1; l < this.Count; l++)
                     {
                         t1 = this.OTime[l];
                         if (t1 > 0)
@@ -184,8 +184,8 @@ export class TQProxy
                             if (t1 < t2)
                             {
                                 // increment Rank and PosR for j
-                                this.Rank[j] = this.Rank[j] + 1;
-                                this.PosR[j] = this.PosR[j] + 1;
+                                this.Rank[j2] = this.Rank[j2] + 1;
+                                this.PosR[j2] = this.PosR[j2] + 1;
                             }
 
                             if (t1 > t2)
@@ -204,22 +204,22 @@ export class TQProxy
                                     if (BibMerker > this.Bib[l])
                                         this.PosR[l] = this.PosR[l] + 1;
                                     else
-                                        this.PosR[j] = this.PosR[j] + 1;
+                                        this.PosR[j2] = this.PosR[j2] + 1;
                                 }
                                 else
                                 {
                                     if (BibMerker < this.Bib[l])
                                         this.PosR[l] = this.PosR[l] + 1;
                                     else
-                                        this.PosR[j] = this.PosR[j] + 1;
+                                        this.PosR[j2] = this.PosR[j2] + 1;
                                 }
                             }
                         }
                     }
-                    if (this.PosR[j] > 0)
+                    if (this.PosR[j2] > 0)
                     {
-                        const temp: number = this.PosR[j];
-                        this.PLZ[temp-1] = j;
+                        const temp: number = this.PosR[j2];
+                        this.PLZ[temp-1] = j2;
                     }
                 }
             }

@@ -395,8 +395,8 @@ export class TBO extends TBaseBO {
         const cl: TRaceRowCollection = this.RNode[0].Collection;
         if ((cl.Count < newCount) && (newCount <= this.BOParams.MaxStartlistCount)) {
             while (cl.Count < newCount) {
-                for (let i = 0; i <= this.BOParams.RaceCount; i++)
-                    this.RNode[i].Collection.Add();
+                for (let i1 = 0; i1 <= this.BOParams.RaceCount; i1++)
+                    this.RNode[i1].Collection.Add();
                 this.EventNode.Collection.Add();
             }
             result = true;
@@ -404,8 +404,8 @@ export class TBO extends TBaseBO {
         if ((cl.Count > newCount) && (newCount >= this.BOParams.MinStartlistCount)) {
             while (cl.Count > newCount) {
                 const c: number = cl.Count;
-                for (let i = 0; i <= this.BOParams.RaceCount; i++)
-                    this.RNode[i].Collection.Delete(c - 1);
+                for (let i2 = 0; i2 <= this.BOParams.RaceCount; i2++)
+                    this.RNode[i2].Collection.Delete(c - 1);
                 this.EventNode.Collection.Delete(c - 1);
             }
             result = true;
@@ -578,8 +578,8 @@ export class TBO extends TBaseBO {
                 }
             }
             else {
-                for (let j = 0; j < cr.Props.Count; j++) {
-                    prop = cr.Props.GetProp(7 + j, prop);
+                for (let p = 0; p < cr.Props.Count; p++) {
+                    prop = cr.Props.GetProp(7 + p, prop);
                     this.MsgTree.Division.Athlete(cr.SNR).Prop(prop.Key, prop.Value);
                 }
             }
@@ -701,8 +701,8 @@ export class TBO extends TBaseBO {
                 qn = this.RNode[1];
                 g = this.MsgTree.Division;
                 qc = qn.Collection;
-                for (let i = 0; i < qc.Count; i++) {
-                    qr = qc.Items[i];
+                for (let i1 = 0; i1 < qc.Count; i1++) {
+                    qr = qc.Items[i1];
                     if ((qr.Bib > 0) && (qr.Bib !== qr.BaseID))
                         g.Race1.Startlist.Pos(qr.BaseID).Bib(qr.Bib.toString());
                     if (qr.SNR > 0)
@@ -729,9 +729,9 @@ export class TBO extends TBaseBO {
                     continue;
                 if (!qn.IsRacing)
                     r.IsRacing(TUtils.BoolStr(false));
-                for (let i = 0; i < qc.Count; i++) {
-                    qr = qc.Items[i];
-                    if ((i === 0) && qr.ST.TimePresent)
+                for (let i2 = 0; i2 < qc.Count; i2++) {
+                    qr = qc.Items[i2];
+                    if ((i2 === 0) && qr.ST.TimePresent)
                         r.Bib(qr.Bib).ST(qr.ST.AsString);
 
                     if (!CompactFormat) {
@@ -745,7 +745,7 @@ export class TBO extends TBaseBO {
                         if (qr.MRank > 0)
                             r.Bib(qr.Bib).Rank(qr.MRank.toString());
                         if (this.EventNode.UseFleets) {
-                            const ere: TEventRaceEntry = this.EventNode.Collection.Items[i].Race[n];
+                            const ere: TEventRaceEntry = this.EventNode.Collection.Items[i2].Race[n];
                             const f: number = ere.Fleet;
                             if (f > 0)
                                 r.Bib(qr.Bib).FM(f.toString());
@@ -754,7 +754,7 @@ export class TBO extends TBaseBO {
                     }
 
                     if (this.EventNode.UseFleets) {
-                        const ere: TEventRaceEntry = this.EventNode.Collection.Items[i].Race[n];
+                        const ere: TEventRaceEntry = this.EventNode.Collection.Items[i2].Race[n];
                         if (!ere.IsRacing)
                             r.Bib(qr.Bib).RV("x");
                     }
@@ -1002,8 +1002,8 @@ export class TBO extends TBaseBO {
         const tc = this.BOParams.ITCount;
 
         const foo: number[] = [];
-        for (let i = 1; i <= tc; i++) {
-          foo.push(i);
+        for (let j = 1; j <= tc; j++) {
+          foo.push(j);
         }
         foo.push(0); //finish time point at index 0 is last time point in race
 

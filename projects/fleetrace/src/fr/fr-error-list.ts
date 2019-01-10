@@ -57,14 +57,14 @@ export class TOTimeErrorList
             const a: number[] = new Array<number>(EntryCount + 1);
 
             // clear array slots
-            for (let i = 0; i < a.length; i++)
+            for (let i1 = 0; i1 < a.length; i1++)
             {
-                a[i] = 0;
+                a[i1] = 0;
             }
 
-            for (let i = 0; i < cl.length; i++)
+            for (let i2 = 0; i2 < cl.length; i2++)
             {
-                cr = cl[i];
+                cr = cl[i2];
                 re = cr.Race[r];
                 const temp: number = re.OTime;
                 if (temp < 0)
@@ -144,13 +144,13 @@ export class TOTimeErrorList
             for (let r = 1; r < cl.RCount; r++)
             {
                 // clear array slots
-                for (let i = 0; i < a.length; i++)
+                for (let i1 = 0; i1 < a.length; i1++)
                 {
-                    a[i] = 0;
+                    a[i1] = 0;
                 }
-                for (let i = 0; i < cl.Count; i++)
+                for (let i2 = 0; i2 < cl.Count; i2++)
                 {
-                    cr = cl.Items[i];
+                    cr = cl.Items[i2];
                     re = cr.Race[r];
                     const temp: number = re.OTime;
                     if (temp < 0)
@@ -306,13 +306,13 @@ export class TOTimeErrorList
             a = new Array<number>(EntryCount + 1); // SetLength(a, EntryCount + 1);
 
             // clear array slots
-            for (let i = 0; i < a.length; i++)
+            for (let i1 = 0; i1 < a.length; i1++)
             {
-                a[i] = 0;
+                a[i1] = 0;
             }
-            for (let i = 0; i < cl.length; i++)
+            for (let i2 = 0; i2 < cl.length; i2++)
             {
-                cr = cl[i];
+                cr = cl[i2];
                 temp = cr.Race[r].OTime;
                 if (temp < 0) return false; // below lower limit
                 if (temp > EntryCount) return false; // beyond upper limit
@@ -320,11 +320,11 @@ export class TOTimeErrorList
                 a[temp] = 1;
             }
             HasNull = false;
-            for (let i = 1; i < cl.length; i++)
+            for (let i3 = 1; i3 < cl.length; i3++)
             {
-                if ((a[i] === 1) && HasNull)
+                if ((a[i3] === 1) && HasNull)
                     return false; // not contiguous
-                if (a[i] === 0)
+                if (a[i3] === 0)
                     HasNull = true;
             }
             return true;
@@ -345,13 +345,13 @@ export class TOTimeErrorList
             for (let r = 1; r < cl.RCount; r++)
             {
                 // clear array slots
-                for (let i = 0; i < a.length; i++)
+                for (let i1 = 0; i1 < a.length; i1++)
                 {
-                    a[i] = 0;
+                    a[i1] = 0;
                 }
-                for (let i = 0; i < cl.Count; i++)
+                for (let i2 = 0; i2 < cl.Count; i2++)
                 {
-                    cr = cl.Items[i];
+                    cr = cl.Items[i2];
                     temp = cr.Race[r].OTime;
                     if (temp < 0) return false; // below lower limit
                     if (temp > EntryCount) return false; // beyond upper limit
@@ -359,11 +359,11 @@ export class TOTimeErrorList
                     a[temp] = 1;
                 }
                 HasNull = false;
-                for (let i = 1; i < cl.Count; i++)
+                for (let i3 = 1; i3 < cl.Count; i3++)
                 {
-                    if ((a[i] === 1) && HasNull)
+                    if ((a[i3] === 1) && HasNull)
                         return false; // not contiguous
-                    if (a[i] === 0)
+                    if (a[i3] === 0)
                         HasNull = true;
                 }
             }

@@ -138,8 +138,8 @@ export class TProxyLoader {
         }
         // count Gezeitet
         let a = 0;
-        for (let i = 0; i < cl.Count; i++) {
-            if (cl.EntryList[i].IsGezeitet)
+        for (let ei = 0; ei < cl.Count; ei++) {
+            if (cl.EntryList[ei].IsGezeitet)
                 a++;
         }
         this.proxyNode.Gezeitet = a;

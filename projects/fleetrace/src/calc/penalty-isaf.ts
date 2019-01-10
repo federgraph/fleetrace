@@ -401,7 +401,6 @@ export class TPenaltyISAF // extends TPenalty
     toString(): string {
         let po: TISAFPenaltyOther;
         let s: string;
-        const showPts = true;
 
         this.SLPenalty.Clear();
 
@@ -413,17 +412,17 @@ export class TPenaltyISAF // extends TPenalty
             po = <TISAFPenaltyOther>i;
             if (this.PenaltyOther.IsMember(i)) {
                 s = TPenaltyISAF.PenaltyOtherString(po);
-                if ((po === TISAFPenaltyOther.STP) && showPts)
+                if ((po === TISAFPenaltyOther.STP))
                     s += '/' + this.Points.toFixed(2);
-                else if ((po === TISAFPenaltyOther.MAN) && showPts)
+                else if ((po === TISAFPenaltyOther.MAN))
                     s += '/' + this.Points.toFixed(2);
-                else if ((po === TISAFPenaltyOther.RDG) && showPts)
+                else if ((po === TISAFPenaltyOther.RDG))
                     s += '/' + this.Points.toFixed(2);
-                else if ((po === TISAFPenaltyOther.DPI) && showPts)
+                else if ((po === TISAFPenaltyOther.DPI))
                     s += '/' + this.Points.toFixed(2);
-                else if ((po === TISAFPenaltyOther.SCP) && showPts)
+                else if ((po === TISAFPenaltyOther.SCP))
                              s += '/' + this.Percent.toFixed(2) + '%';
-                else if ((po === TISAFPenaltyOther.TMP) && showPts)
+                else if ((po === TISAFPenaltyOther.TMP))
                     s += '/' + this.Percent.toString() + "%";
 
                 this.SLPenalty.Add(s);

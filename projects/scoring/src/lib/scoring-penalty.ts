@@ -113,7 +113,8 @@ export class TRSPenalty {
     @returns new penalty object
     */
     static ParsePenalty(origPen: string): TRSPenalty {
-        let pen: string = origPen.toUpperCase();
+        let pen = origPen.toUpperCase();
+        let rsp: TRSPenalty = null;
 
         if (pen.length === 0)
             return new TRSPenalty(Constants.NOP);
@@ -197,23 +198,21 @@ export class TRSPenalty {
             return new TRSPenalty(Constants.TLE);
 
         if (pen.endsWith("%")) {
-            const pctPen: TRSPenalty = new TRSPenalty(Constants.SCP);
+            rsp = new TRSPenalty(Constants.SCP);
             try {
-                const pct: number = Number.parseInt(pen.substring(0, pen.length - 2), 10);
-                pctPen.Percent = pct;
+                rsp.Percent = Number.parseInt(pen.substring(0, pen.length - 2), 10);
             }
             catch (ex) {
                 // don't care
             }
-            return pctPen;
+            return rsp;
         }
 
         if (pen.startsWith("P")) {
-            const pctPen: TRSPenalty = new TRSPenalty(Constants.SCP);
+            rsp = new TRSPenalty(Constants.SCP);
             try {
-                const pct: number = Number.parseInt(pen.substring(1), 10);
-                pctPen.Percent = pct;
-                return pctPen;
+                rsp.Percent = Number.parseInt(pen.substring(1), 10);
+                return rsp;
             }
             catch (ex) {
                 console.log(ex.Message);
@@ -221,36 +220,33 @@ export class TRSPenalty {
         }
 
         if (pen === "STP" || pen === "RDG" || pen === "RDR" || pen === "MAN" || pen === "DPI") {
-            let penalty: TRSPenalty;
             if (pen.startsWith("STP"))
-                penalty = new TRSPenalty(Constants.STP);
+                rsp = new TRSPenalty(Constants.STP);
             else if (pen.startsWith("MAN"))
-                penalty = new TRSPenalty(Constants.MAN);
+                rsp = new TRSPenalty(Constants.MAN);
             else if (pen.startsWith("DPI"))
-                penalty = new TRSPenalty(Constants.DPI);
+                rsp = new TRSPenalty(Constants.DPI);
             else // if (pen.startsWith("RDG"))
-                penalty = new TRSPenalty(Constants.RDG);
+                rsp = new TRSPenalty(Constants.RDG);
             // assume is form "MAN/<pts>"
             try {
-                const pts: number = Number.parseFloat(val); // , NumberFormatInfo.InvariantInfo);
-                penalty.Points = pts;
+                rsp.Points = Number.parseFloat(val); // , NumberFormatInfo.InvariantInfo); 
             }
             catch (ex) {
                 console.log(ex.Message);
             }
-            return penalty;
+            return rsp;
         }
 
         if (pen === "SCP" || pen === "PCT") {
-            const penalty: TRSPenalty = new TRSPenalty(Constants.SCP);
+            rsp = new TRSPenalty(Constants.SCP);
             // assume is form "SCP/<pts>"
             try {
-                const pct: number = Number.parseInt(val, 10);
-                penalty.Percent = pct;
+                rsp.Percent = Number.parseInt(val, 10);
             }
             catch (ex) {
             }
-            return penalty;
+            return rsp;
         }
 
         // throw new System.ArgumentException("Unable to parse penalty, pen=" + pen);

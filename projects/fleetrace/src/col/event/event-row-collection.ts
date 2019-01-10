@@ -888,18 +888,18 @@ export class TEventNode extends TBaseNode<
             this.UseFleets = true;
             cl = this.Collection;
             // clear fleet assignment
-            for (let j = 0; j < cl.Count; j++) {
-                cr = cl.Items[j];
+            for (let j1 = 0; j1 < cl.Count; j1++) {
+                cr = cl.Items[j1];
                 ere = cr.Race[r];
                 ere.Fleet = 0;
             }
-            // gererate new from existing finish position info
+            // generate new from existing finish position info
             // Fleet f, FinishPosition fp
             let f;
             for (let fp = 1; fp <= this.TargetFleetSize; fp++) {
                 f = 1;
-                for (let j = 0; j < cl.Count; j++) {
-                    cr = cl.Items[j];
+                for (let j2 = 0; j2 < cl.Count; j2++) {
+                    cr = cl.Items[j2];
                     ere = cr.Race[r];
                     if (ere.OTime === fp && ere.Fleet === 0) {
                         ere.Fleet = f;

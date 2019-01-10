@@ -22,32 +22,7 @@ export class TimeStatusStruct {
 }
 
 export class TimeConst {
-    static cRun1 = 1;
-    static cRun2 = 2;
-    static cRun3 = 3;
-    static eaDSQGate = 1;
-    static eaStatus = 2;
-    static eaOTime = 3;
-
-    static TimeStatus_None = 0;  // noch keine Zeit da, kann aber noch kommen
-    static TimeStatus_Auto = 1; // Zeit vorhanden, zuletzt automatisch gesetzt
-    static TimeStatus_Man = 2; // Zeit vorhanden, zuletzt von Hand gesetzt
-    static TimeStatus_TimePresent = 3; // Zeit vorhanden, weiß nicht wie eingetragen
-    static TimeStatus_Penalty = 4; // Penaltytime wurde automatisch eingetragen
-
     static TimeNull = Number.MAX_SAFE_INTEGER;
-
-    static channel_QA_ST = 0;
-    static channel_QA_IT = 1;
-    static channel_QA_FT = 2;
-    static channel_QB_ST = 3;
-    static channel_QB_IT = 4;
-    static channel_QB_FT = 5;
-    static channel_QC_ST = 6;
-    static channel_QC_IT = 7;
-    static channel_QC_FT = 8;
-
-    // public static string [] TimeStatusStrings  = { "", "Auto", "Man", "Time", "Pen" };
     static TimeStatusStrings: TimeStatusStruct = new TimeStatusStruct();
 }
 
@@ -224,10 +199,10 @@ export class TNTime {
         // dabei die Sonderzeichen entfernen,
         // gegebenenfalls Nullen auffüllen (Sekunden, Minuten, Stunden, alles 2-stellig)
         for (let i = dotpos - 1; i >= 0; i--) {
-            const c: string = TimeStr[i];
-            if (c === ':') { // ok
+            const cv: string = TimeStr[i];
+            if (cv === ':') { // ok
             }
-            else if ((c >= '0') && (c <= '9')) { // ok
+            else if ((cv >= '0') && (cv <= '9')) { // ok
             }
             else
                 return false;
@@ -235,9 +210,9 @@ export class TNTime {
 
         // der Nachkommateil wird von dotpos aus nach rechts gelesen:
         const sNachkomma: string = TimeStr.substring(dotpos + 1, TimeStr.length);
-        for (let i = 0; i < sNachkomma.length; i++) {
-            const c: string = sNachkomma[i];
-            if ((c < '0') || (c > '9'))
+        for (let j = 0; j < sNachkomma.length; j++) {
+            const cn: string = sNachkomma[j];
+            if ((cn < '0') || (cn > '9'))
                 return false;
         }
         return true;
@@ -303,10 +278,10 @@ export class TNTime {
         sNachkommaChecked = "";
         let ncc: string;
         sNachkomma = TimeStr.substring(dotpos + 1);        
-        for (let i = 0; i < sNachkomma.length; i++) {
-            ncc = sNachkomma[i];
+        for (let j = 0; j < sNachkomma.length; j++) {
+            ncc = sNachkomma[j];
             if (ncc >= '0' && ncc <= '9')
-                sNachkommaChecked = sNachkommaChecked + sNachkomma[i];
+                sNachkommaChecked = sNachkommaChecked + sNachkomma[j];
         }
         if (sNachkommaChecked === "")
             sNachkommaChecked = "0";

@@ -100,9 +100,9 @@ export class TBaseMsgList extends TBaseMsg {
         if (this.SL.Count === 1) {
             const msg: TBaseMsg = this.NewMsg();
             msg.Prot = this.SL.SL[0];
-            const result: boolean = msg.DispatchProt();
+            const res: boolean = msg.DispatchProt();
             this.MsgResult = msg.MsgResult;
-            return result;
+            return res;
         }
 
         // empty Msg

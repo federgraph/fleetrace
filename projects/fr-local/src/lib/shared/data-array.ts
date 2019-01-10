@@ -210,57 +210,57 @@ export class JsonInfo {
   convertRaceDataJson(o: RaceDataJson): string[] {
     const a: string[] = [];
 
-    for (const s of o.FinishInfo)
-      a.push(s);
+    for (const s1 of o.FinishInfo)
+      a.push(s1);
 
-    for (const s of o.TimingInfo)
-      a.push(s);
+    for (const s2 of o.TimingInfo)
+      a.push(s2);
 
-    for (const s of o.PenaltyInfo)
-      a.push(s);
+    for (const s3 of o.PenaltyInfo)
+      a.push(s3);
 
     return a;
   }
 
   getEventData(): string[] {
     const o: EventDataJson = this.getEventDataJson();
-    return this.convertEventDataJson(o, false);
+    return this.convertEventDataJson(o);
   }
 
-  convertEventDataJson(o: EventDataJson, includeEmptyList: boolean = false): string[] {
+  convertEventDataJson(o: EventDataJson): string[] {
   
     const a: string[] = [];
 
-    for (const s of o.EventParams)
-      a.push(s);
+    for (const s1 of o.EventParams)
+      a.push(s1);
 
-    for (const s of o.EventProps)
-      a.push(s);
+    for (const s2 of o.EventProps)
+      a.push(s2);
 
-    if (o.NameTable.length > 2 || includeEmptyList)
-      for (const s of o.NameTable)
-        a.push(s);
+    if (o.NameTable.length > 2)
+      for (const s3 of o.NameTable)
+        a.push(s3);
 
-    for (const s of o.StartList)
-      a.push(s);
+    for (const s4 of o.StartList)
+      a.push(s4);
 
-    if (o.FleetList.length > 2 || includeEmptyList)
-      for (const s of o.FleetList)
-        a.push(s);
+    if (o.FleetList.length > 2)
+      for (const s5 of o.FleetList)
+        a.push(s5);
 
-    for (const s of o.FinishInfo)
-      a.push(s);
+    for (const s6 of o.FinishInfo)
+      a.push(s6);
 
     if (o.TimingInfo.length > 0)
       for (const ti of o.TimingInfo)
-        for (const s of ti)
-          a.push(s);
+        for (const s7 of ti)
+          a.push(s7);
 
     if (o.PenaltyInfo.length > 0)
       for (const pi of o.PenaltyInfo) {
         if (pi.length > 0)
-          for (const s of pi)
-            a.push(s);
+          for (const s8 of pi)
+            a.push(s8);
       }
 
     return a;

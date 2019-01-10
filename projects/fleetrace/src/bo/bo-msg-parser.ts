@@ -181,8 +181,8 @@ export class TMsgParser extends TLineParser {
             this.SLCompare.Add(FieldNames.GR);
             this.SLCompare.Add(FieldNames.PB);
 
-            for (let i = 1; i <= this.BO.BOParams.FieldCount; i++)
-                this.SLCompare.Add("N" + i.toString());
+            for (let j = 1; j <= this.BO.BOParams.FieldCount; j++)
+                this.SLCompare.Add("N" + j.toString());
         }
 
         this.SLCompare.Add("Count");

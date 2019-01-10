@@ -44,11 +44,11 @@ export class TCalcEventProxy01 extends TCalcEventProxy {
                 this.BTime[i] = TimeConst.TimeNull;
         }
         else {
-            for (let i = 0; i < this.Count; i++) {
-                if (this.OTime[i] > 0)
-                    this.BTime[i] = this.OTime[i] - this.BestOTime;
+            for (let j = 0; j < this.Count; j++) {
+                if (this.OTime[j] > 0)
+                    this.BTime[j] = this.OTime[j] - this.BestOTime;
                 else
-                    this.BTime[i] = TimeConst.TimeNull;
+                    this.BTime[j] = TimeConst.TimeNull;
             }
         }
     }
@@ -74,10 +74,10 @@ export class TCalcEventProxy01 extends TCalcEventProxy {
         let temp: number;
 
         // reset
-        for (let j = 0; j < this.Count; j++) {
-            this.Rank[j] = 1;
-            this.PosR[j] = 1;
-            this.PLZ[j] = -1;
+        for (let j1 = 0; j1 < this.Count; j1++) {
+            this.Rank[j1] = 1;
+            this.PosR[j1] = 1;
+            this.PLZ[j1] = -1;
         }
 
         // new calculation
@@ -154,10 +154,10 @@ export class TCalcEventProxy01 extends TCalcEventProxy {
             return;
 
         RaceCount = qn.Collection.Items[0].RCount;
-        for (let i = 1; i < RaceCount; i++) {
-            this.LoadProxy(qn, i);
+        for (let i1 = 1; i1 < RaceCount; i1++) {
+            this.LoadProxy(qn, i1);
             this.Calc1();
-            this.UnLoadProxy(qn, i);
+            this.UnLoadProxy(qn, i1);
         }
 
         // Points

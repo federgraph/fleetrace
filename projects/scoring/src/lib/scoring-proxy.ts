@@ -1,7 +1,3 @@
-// export class TScoringProxy {
-
-// }
-
 export class TProxyProps {
     static readonly p_FRProxy = "FRProxy";
     static readonly p_Gezeitet = "Gezeitet";
@@ -106,9 +102,9 @@ export class TFRProxy extends TProxyProps {
         }
 
         this.EntryInfoCollection.Clear();
-        for (let i = 0; i < p.EntryInfoCollection.Count; i++) {
+        for (let j = 0; j < p.EntryInfoCollection.Count; j++) {
             const ei: TEntryInfo = this.EntryInfoCollection.Add();
-            ei.Assign(p.EntryInfoCollection.EntryList[i]);
+            ei.Assign(p.EntryInfoCollection.EntryList[j]);
         }
 
         this.Gezeitet = p.Gezeitet;

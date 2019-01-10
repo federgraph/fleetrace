@@ -53,11 +53,11 @@ export class TCalcEventProxy11 extends TCalcEventProxy {
         ep.DivisionName = this.EventProps.DivisionName;
 
         this.proxyNode.RCount = this.eventNode.RCount; // SetLength(p.IsRacing, qn.RCount); // RCount = RaceCount+1
-        for (let r = 1; r < this.eventNode.RCount; r++) {
-            if (this.BO.GetIsRacing(r))
-                this.proxyNode.IsRacing[r] = true;
+        for (let r1 = 1; r1 < this.eventNode.RCount; r1++) {
+            if (this.BO.GetIsRacing(r1))
+                this.proxyNode.IsRacing[r1] = true;
             else
-                this.proxyNode.IsRacing[r] = false;
+                this.proxyNode.IsRacing[r1] = false;
 
             this.proxyNode.UseFleets = this.eventNode.UseFleets;
             this.proxyNode.TargetFleetSize = this.eventNode.TargetFleetSize;

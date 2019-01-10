@@ -51,15 +51,15 @@ export class TUniquaPoints {
                 P1 = cr1.GRace.CPoints; // schnelle Variante über Platzziffer
             else {
                 P1 = 0;
-                for (let i = 0; i < cl.Count; i++) {
-                    cr = cl.Items[i];
+                for (let i1 = 0; i1 < cl.Count; i1++) {
+                    cr = cl.Items[i1];
                     if (cr.GRace.CPoints < P1)
                         P1 = cr.GRace.CPoints;
                 }
             }
 
-            for (let i = 0; i < cl.Count; i++) {
-                cr = cl.Items[i];
+            for (let i2 = 0; i2 < cl.Count; i2++) {
+                cr = cl.Items[i2];
 
                 // Ranglistenpunkte
                 PX = cr.GRace.CPoints; // Punktzahl des Bootes
