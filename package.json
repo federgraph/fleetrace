@@ -1,4 +1,4 @@
-{
+﻿{
   "name": "fr-workspace",
   "version": "0.0.1",
   "author": "Gustav Schubert",
@@ -12,6 +12,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build-fr": "ng build --base-href=/fr01/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
