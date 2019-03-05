@@ -20,7 +20,6 @@ import { CurrentNumbers } from 'fleetrace';
 import { BreakpointSet } from './shared/breakpoint-set';
 import { IconData, PreTextIcons, TextAreaIcons } from 'fr-local';
 import { HttpParams } from '@angular/common/http';
-import { ApiComponent } from 'fr-remote';
 
 enum Page {
   None,
@@ -180,7 +179,7 @@ export class AppComponent implements OnInit {
     this.preTextIcons = IconData.readIconData(PreTextIcons);
   }
 
-  breakpointChanged(state: BreakpointState) {
+  breakpointChanged() {
     this.breakpointSet.test(this.breakpointObserver);
     this.columns = this.breakpointsMap.get(this.breakpointSet.id);
     this.updateBreaks();
@@ -257,7 +256,7 @@ export class AppComponent implements OnInit {
     );
 
     this.breakpointObserver.observe(this.breakpointSet.all()).subscribe(
-      (state: BreakpointState) => { this.breakpointChanged(state); }
+      (state: BreakpointState) => { this.breakpointChanged(); }
     );
   }
 
@@ -612,7 +611,7 @@ export class AppComponent implements OnInit {
     this.markBibAndShow();
   }
 
-  onEntriesTableChanged(event: number) {
+  onEntriesTableChanged() {
     this.showEvent();
     this.showRace();
     this.updateBib();
@@ -657,7 +656,7 @@ export class AppComponent implements OnInit {
    * When row with snr was deleted, update all views that depend on StammdatenTabelle.
    * @param event snr that was deleted
    */
-  onEntryDeleted(event: number) {
+  onEntryDeleted() {
     this.showEntries();
     this.showEvent();
     this.showRace();
@@ -1216,7 +1215,7 @@ export class AppComponent implements OnInit {
     }
   }
 
-  sendMsg(msg: string) {
+  sendMsg() {
     // if (this.connBar) {
     //   this.connBar.sendMsg(msg);
     // }
@@ -1227,14 +1226,14 @@ export class AppComponent implements OnInit {
     while (this.BOManager.BO.msgQueueR.length > 0) {
       msg = this.BOManager.BO.msgQueueR.pop();
       this.BOManager.BO.Dispatch(msg);
-      this.sendMsg(msg);
+      this.sendMsg();
     }
 
     while (this.BOManager.BO.msgQueueE.length > 0) {
       msg = this.BOManager.BO.msgQueueE.pop();
       if (msg !== "" && this.WantUpdateEvent) {
         this.BOManager.BO.Dispatch(msg);
-        this.sendMsg(msg);
+        this.sendMsg();
       }
     }
 
@@ -1318,7 +1317,7 @@ export class AppComponent implements OnInit {
     this.updateAll();
   }
 
-  handleCalc(value: number) {
+  handleCalc() {
     this.calcRace();
     this.calcEvent();
   }
