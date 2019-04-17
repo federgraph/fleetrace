@@ -1,6 +1,8 @@
-﻿# fleetrace
+# fleetrace-angular-libs
 
-This is an Angular/Typescript workspace. (I am using Visual Studio Code on Windows 10 to work on the project.)
+This is an Angular/Typescript workspace using library projects.
+
+(I am using Visual Studio Code on Windows 10 to work on the project.)
 
 ## How to build
 
