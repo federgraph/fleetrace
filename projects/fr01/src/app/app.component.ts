@@ -15,7 +15,7 @@ import { TimingButtonsComponent } from 'fr-local';
 import { EventProps, EntryRow, EventParams } from 'fr-local';
 import { TExcelExporter } from 'fleetrace';
 import { TableID } from 'fleetrace';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { CurrentNumbers } from 'fleetrace';
 import { BreakpointSet } from './shared/breakpoint-set';
 import { IconData, PreTextIcons, TextAreaIcons } from 'fr-local';
@@ -117,22 +117,22 @@ export class AppComponent implements OnInit {
   SaveVisible = false;
   LoadVisible = false;
 
-  @ViewChild('eventTab')
+  @ViewChild('eventTab', { static: false })
   eventTab: EventComponent;
 
-  @ViewChild('raceTab')
+  @ViewChild('raceTab', { static: false })
   raceTab: RaceComponent;
 
-  @ViewChild('entriesTab')
+  @ViewChild('entriesTab', { static: false })
   entriesTab: EntriesComponent;
 
-  @ViewChild('widgetTab')
+  @ViewChild('widgetTab', { static: false })
   widgetTab: TimingWidgetComponent;
 
-  @ViewChild('timingTab')
+  @ViewChild('timingTab', { static: false })
   timingTab: TimingButtonsComponent;
 
-  @ViewChild('bibInfo')
+  @ViewChild('bibInfo', { static: false })
   bibTab: BibComponent;
 
   private SL: TStringList;
