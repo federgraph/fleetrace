@@ -1,24 +1,24 @@
-import { TFinish } from "./scoring-finish";
-import { TEntry } from "./scoring-entry";
+import { TFinish } from './scoring-finish';
+import { TEntry } from './scoring-entry';
 
 export class TFinishList extends Array<TFinish> {
 
     constructor() {
         super();
-        //if (environment.wantES5)
+        // if (environment.wantES5)
         Object.setPrototypeOf(this, TFinishList.prototype);
     }
 
     /**
-    * returns a finish if found, otherwise null
-    */
+     * returns a finish if found, otherwise null
+     */
     findEntry(e: TEntry): TFinish {
-        if (this.length === 0)
+        if (this.length === 0) {
             return null;
+        }
 
         let f: TFinish;
-        for (let i = 0; i < this.length; i++) {
-            f = this[i];
+        for (f of this) {
             if ((f.Entry != null) && (f.Entry.equals(e))) {
                 return f;
             }
@@ -32,18 +32,21 @@ export class TFinishList extends Array<TFinish> {
 
     Remove(e: TFinish) {
         const i = this.indexOf(e);
-        if (i > -1)
+        if (i > -1) {
             this.splice(i, 1);
+    }
     }
 
     AddAll(al: TFinishList) {
-        for (let i = 0; i < al.length; i++)
-            this.push(al[i]);
+        for (const f of al) {
+            this.push(f);
+        }
     }
 
     RemoveAll(al: TFinishList) {
-        for (let i = 0; i < this.length; i++)
+        for (let i = 0; i < this.length; i++) {
             this.Remove(al[i]);
+    }
     }
 
     Contains(obj: TFinish): boolean {
@@ -51,8 +54,9 @@ export class TFinishList extends Array<TFinish> {
     }
 
     Exchange(x: number, y: number) {
-        if (this.length < 2)
+        if (this.length < 2) {
             return;
+        }
         this.splice(y, 1, this.splice(x, 1, this[y])[0]);
     }
 

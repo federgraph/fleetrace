@@ -90,13 +90,11 @@ export class RaceComponent {
       if (rn) {
         rn.Modified = true;
         this.BOManager.BO.Calc();
-    this.show();
-  }
-      else {
+        this.show();
+      } else {
         console.log(`rn invalid for this.race = ${this.race} in race.component.calc `);
       }
-    }
-    else {
+    } else {
       console.log(`out of range: RNode[${this.race}] in race.component.calc `);
     }
 
@@ -115,8 +113,7 @@ export class RaceComponent {
   thClick(c: number) {
     if (this.ColGrid.ColsActive.SortColIndex === c) {
       this.ColGrid.DisplayOrder.Descending = !this.ColGrid.DisplayOrder.Descending;
-    }
-    else {
+    } else {
       this.ColGrid.ColsActive.SortColIndex = c;
       this.ColGrid.DisplayOrder.Descending = false;
     }
@@ -130,13 +127,15 @@ export class RaceComponent {
 
   toggleLayout() {
     const cb = this.BOManager.BO.RaceBO;
-    if (!cb)
+    if (!cb) {
       return;
+    }
 
-    if (cb.TableLayout === 0)
+    if (cb.TableLayout === 0) {
       cb.TableLayout = 1;
-    else
+    } else {
       cb.TableLayout = 0;
+    }
 
     cb.InitColsActiveLayout(this.ColGrid, this.FTimePoint);
     this.show();
@@ -158,8 +157,7 @@ export class RaceComponent {
     if (ru) {
     ru.CopyFromMRank();
     this.show();
-  }
-    else {
+    } else {
       console.log(`out of range: RNode[${this.race}} in race.component.fromMRank`);
     }
   }

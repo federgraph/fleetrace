@@ -17,10 +17,10 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule  } from '@angular/material/toolbar';
 
-import {ScoringModule} from 'scoring';
-import {FleetRaceModule} from 'fleetrace';
-import {FrLocalModule} from 'fr-local';
-import {FrRemoteModule} from 'fr-remote';
+import { ScoringModule } from 'scoring';
+import { FleetRaceModule } from 'fleetrace';
+import { FrLocalModule } from 'fr-local';
+import { FrRemoteModule } from 'fr-remote';
 
 import { AppComponent } from './app.component';
 
@@ -32,15 +32,15 @@ import { AppComponent } from './app.component';
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
-    ReactiveFormsModule,    
+    ReactiveFormsModule,
     HttpClientModule,
     LayoutModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule,    
+    MatButtonModule,
     MatCheckboxModule,
     MatSelectModule,
-    MatRadioModule,        
+    MatRadioModule,
     MatButtonModule,
     MatIconModule,
     MatToolbarModule,

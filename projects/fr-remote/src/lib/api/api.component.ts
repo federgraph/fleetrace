@@ -5,7 +5,7 @@ import { RaceDataJson, EventDataJson } from 'fr-local';
 import { JsonInfo } from 'fr-local';
 import { IEventDataItem } from 'fr-local';
 
-const consume_button_row_legend = `
+const consumeButtonRowLegend = `
 --- consume button row ----
 Pull E  = using EventDataText from api/event-data
 Pull EJ = using EventDataJson from api/event-data-json
@@ -15,10 +15,11 @@ Clear = calling /api/manage-clear
 cls = clear TestOutput variable
 `;
 
-const post_button_row_legend = `
+const postButtonRowLegend = `
 --- post-button-row ---
-EJ = posting EventDataJSON to /api/event-data-json
-RJ = posting RaceDataJSON to /api/race-data-json
+Push E = posting EventDataText to /api/event-data
+Push EJ = posting EventDataJSON to /api/event-data-json
+Push RJ = posting RaceDataJSON to /api/race-data-json
 
 ED = posting EventDataJSON to /api/ed.json
 RD = posting RaceDataJSON to a/pi/rd.json
@@ -27,7 +28,7 @@ UD 2 = posting EventDataJSON to /ud/2
 UD 3 = posting RaceDataJSON to /ud/3
 `;
 
-const inspect_button_row_legend = ` 
+const inspectButtonRowLegend = `
 --- test-button-row ---
 event-data  = show EventDataText from /api/event-data
 event-data-json = show EventDataJson from /api/event-data-json
@@ -40,7 +41,7 @@ ud/2 = show EventDataJson from /ud/2
 ud/3 = show RaceDataJson from /ud/3
 `;
 
-const backup_button_row_legend = ` 
+const backupButtonRowLegend = `
 --- backup-button-row ---
 backup = show json from /api/backup
 backlog = show json from /api/backlog
@@ -71,30 +72,28 @@ export class ApiComponent implements OnInit {
   @Output() raceDataAvailable: EventEmitter<string[]> = new EventEmitter();
   @Output() notify: EventEmitter<number> = new EventEmitter();
 
-  Info: string = "info";
-  TestOutput: string = "";
+  Info: string = 'info';
+  TestOutput: string = '';
 
   jsonInfo: JsonInfo;
 
-  constructor(public BOManager: TBOManager,
-    private apiService: ApiService) { 
+  constructor(public BOManager: TBOManager, private apiService: ApiService) {
       this.jsonInfo = new JsonInfo(BOManager);
   }
 
   ngOnInit() {
-      //this.pullE();
+      // this.pullE();
   }
 
   onEventDataStringAvailable(data: string) {
-    if (data !== "") {
+    if (data !== '') {
       const ed: IEventDataItem = new IEventDataItem();
       ed.EventName = 'Current Event (pulled via api)';
       ed.EventData = data;
-      this.TestOutput = 'emitting event data ...';      
+      this.TestOutput = 'emitting event data ...';
       this.eventDataAvailable.emit(ed);
-    }
-    else {
-      this.TestOutput = 'cannot load event data item from api server';      
+    } else {
+      this.TestOutput = 'cannot load event data item from api server';
     }
   }
 
@@ -103,7 +102,7 @@ export class ApiComponent implements OnInit {
     ML.SL = this.jsonInfo.convertEventDataJson(data);
     this.onEventDataStringAvailable(ML.Text);
   }
-  
+
   onRaceDataJsonAvailable(data: RaceDataJson) {
     const ML = new TStringList();
     ML.SL = this.jsonInfo.convertRaceDataJson(data);
@@ -113,50 +112,56 @@ export class ApiComponent implements OnInit {
   // --- consume-button-row ---
 
   pullE() {
-    this.Info = "using plain-text EventData from api/event-data";
-    this.apiService.pullE().subscribe(data => this.onEventDataStringAvailable(data));    
+    this.Info = 'using plain-text EventData from api/event-data';
+    this.apiService.pullEventData().subscribe(data => this.onEventDataStringAvailable(data));
   }
 
   pullEJ() {
-    this.Info = "using EventDataJson from api/event-data-json";
-    this.apiService.pullEJ().subscribe(data => this.onEventDataJsonAvailable(data));        
+    this.Info = 'using EventDataJson from api/event-data-json';
+    this.apiService.pullEventDataJson().subscribe(data => this.onEventDataJsonAvailable(data));
   }
 
   pullRJ() {
-    this.Info = "using RaceDataJson from api/race-data-json";
-    this.apiService.pullRJ(this.race).subscribe(data => this.onRaceDataJsonAvailable(data));        
+    this.Info = 'using RaceDataJson from api/race-data-json';
+    this.apiService.pullRaceDataJson(this.race).subscribe(data => this.onRaceDataJsonAvailable(data));
   }
 
   clear() {
     this.Info = 'info';
     this.TestOutput = 'return value  to be shown here.';
-    this.apiService.manageClear().subscribe(data => this.TestOutput = "called apiSerice.manageClear()");
+    this.apiService.manageClear().subscribe(data => this.TestOutput = 'called apiSerice.manageClear()');
     this.notify.emit(1);
   }
 
   cls() {
     this.Info = 'Info variable';
-    this.TestOutput = "TestOuput variable";
+    this.TestOutput = 'TestOuput variable';
   }
 
   // --- post-button-row ---
 
+  pushE() {
+    this.Info = 'posting EventData to api/event-data';
+    const t = this.BOManager.BO.Save();
+    this.apiService.pushEventData(t).subscribe(data => this.TestOutput = data.retvalue);
+  }
+
   pushEJ() {
-    this.Info = "posting EventDataJSON to api/event-data-json";
+    this.Info = 'posting EventDataJSON to api/event-data-json';
     const t = this.jsonInfo.getEventDataJson();
-    this.apiService.pushEJ(t).subscribe(data => this.TestOutput = data.retvalue);    
+    this.apiService.pushEventDataJson(t).subscribe(data => this.TestOutput = data.retvalue);
   }
 
   pushRJ() {
     this.Info = `posting RaceDataJSON for race ${this.race} to api/race-data-json`;
     const t: RaceDataJson = this.jsonInfo.getRaceDataJson(this.race);
-    this.apiService.pushRJ(this.race, t).subscribe(data => this.TestOutput = data.retvalue);
+    this.apiService.pushRaceDataJsonForRace(this.race, t).subscribe(data => this.TestOutput = data.retvalue);
   }
 
   pushED() {
-    this.Info = "posting EventDataJSON to api/ed.json";
+    this.Info = 'posting EventDataJSON to api/ed.json';
     const t = this.jsonInfo.getEventDataJson();
-    this.apiService.pushED(t).subscribe(data => this.TestOutput = data.retvalue);    
+    this.apiService.pushED(t).subscribe(data => this.TestOutput = data.retvalue);
   }
 
   pushRD() {
@@ -166,7 +171,7 @@ export class ApiComponent implements OnInit {
   }
 
   push2() {
-    this.Info = "posting EventDataJSON to ud/2";
+    this.Info = 'posting EventDataJSON to ud/2';
     const t = this.jsonInfo.getEventDataJson();
     this.apiService.push2(t).subscribe(data => this.TestOutput = data.retvalue);
   }
@@ -180,93 +185,93 @@ export class ApiComponent implements OnInit {
   // --- inspect-button-row ---
 
   inspectE() {
-    this.Info = "show plain-text EventData from api/event-data";
-    this.apiService.pullE().subscribe(data => this.TestOutput = data);    
+    this.Info = 'show plain-text EventData from api/event-data';
+    this.apiService.pullEventData().subscribe(data => this.TestOutput = data);
   }
 
   inspectEJ() {
-    this.Info = "show plain-text EventData from api/event-data";
-    this.apiService.pullEJ().subscribe(data => this.TestOutput = JSON.stringify(data, null, 2));    
+    this.Info = 'show plain-text EventData from api/event-data';
+    this.apiService.pullEventDataJson().subscribe(data => this.TestOutput = JSON.stringify(data, null, 2));
   }
 
   inspectRJ() {
-    this.Info = "show RaceDataJson for current Race from api/race-data-json";
-    this.apiService.pullRJ(this.race).subscribe(data => this.TestOutput = JSON.stringify(data, null, 2));    
+    this.Info = 'show RaceDataJson for current Race from api/race-data-json';
+    this.apiService.pullRaceDataJson(this.race).subscribe(data => this.TestOutput = JSON.stringify(data, null, 2));
   }
 
   inspectED() {
-    this.Info = "show EventDataJson from api/ed.json";
-    this.apiService.pullED().subscribe(data => this.TestOutput = JSON.stringify(data, null, 2));    
+    this.Info = 'show EventDataJson from api/ed.json';
+    this.apiService.pullEventData().subscribe(data => this.TestOutput = JSON.stringify(data, null, 2));
   }
 
   inspectRD() {
-    this.Info = "show RaceDataJson from api/rd.json";
-    this.apiService.pullRD().subscribe(data => this.TestOutput = JSON.stringify(data, null, 2));    
+    this.Info = 'show RaceDataJson from api/rd.json';
+    this.apiService.pullRD().subscribe(data => this.TestOutput = JSON.stringify(data, null, 2));
   }
 
   inspect2() {
-    this.Info = "show EventDataJson from ud/2";
-    this.apiService.pull2().subscribe(data => this.TestOutput = JSON.stringify(data, null, 2));    
+    this.Info = 'show EventDataJson from ud/2';
+    this.apiService.pull2().subscribe(data => this.TestOutput = JSON.stringify(data, null, 2));
   }
 
   inspect3() {
-    this.Info = "show RaceDataJson from ud/3";
-    this.apiService.pull3().subscribe(data => this.TestOutput = JSON.stringify(data, null, 2));    
+    this.Info = 'show RaceDataJson from ud/3';
+    this.apiService.pull3().subscribe(data => this.TestOutput = JSON.stringify(data, null, 2));
   }
 
   // --- backup-button-row ---
 
   getBackup() {
-    this.Info = "show json from api/backup";
-    this.apiService.getBackup().subscribe(data => this.TestOutput = JSON.stringify(data, null, 2));    
+    this.Info = 'show json from api/backup';
+    this.apiService.getBackup().subscribe(data => this.TestOutput = JSON.stringify(data, null, 2));
   }
 
   getBacklog() {
-    this.Info = "show json from api/backlog";
-    this.apiService.getBacklog().subscribe(data => this.TestOutput = JSON.stringify(data, null, 2));    
+    this.Info = 'show json from api/backlog';
+    this.apiService.getBacklog().subscribe(data => this.TestOutput = JSON.stringify(data, null, 2));
   }
 
   getBackupAndLog() {
-    this.Info = "show json from api/backup-and-log";
-    this.apiService.getBackupAndLog().subscribe(data => this.TestOutput = JSON.stringify(data, null, 2));    
+    this.Info = 'show json from api/backup-and-log';
+    this.apiService.getBackupAndLog().subscribe(data => this.TestOutput = JSON.stringify(data, null, 2));
   }
 
   getBackupString() {
-    this.Info = "show string from api/backup-string";
-    this.apiService.getBackupString().subscribe(data => this.TestOutput = data);    
+    this.Info = 'show string from api/backup-string';
+    this.apiService.getBackupString().subscribe(data => this.TestOutput = data);
   }
 
   getBacklogString() {
-    this.Info = "show string from api/backlog-string";
-    this.apiService.getBacklogString().subscribe(data => this.TestOutput = data);    
+    this.Info = 'show string from api/backlog-string';
+    this.apiService.getBacklogString().subscribe(data => this.TestOutput = data);
   }
 
   getBackupAndLogString() {
-    this.Info = "show string from api/backup-and-log-string";
-    this.apiService.getBackupAndLogString().subscribe(data => this.TestOutput = data);    
+    this.Info = 'show string from api/backup-and-log-string';
+    this.apiService.getBackupAndLogString().subscribe(data => this.TestOutput = data);
   }
 
   getBackupAndLogJsonString() {
-    this.Info = "show string from api/backup-and-log-json-string";
-    this.apiService.getBackupAndLogJsonString().subscribe(data => this.TestOutput = data);    
+    this.Info = 'show string from api/backup-and-log-json-string';
+    this.apiService.getBackupAndLogJsonString().subscribe(data => this.TestOutput = data);
   }
 
   // --- legend buttons ----
 
   showConsumeLegend() {
-    this.TestOutput = consume_button_row_legend;
+    this.TestOutput = consumeButtonRowLegend;
   }
 
   showPostLegend() {
-    this.TestOutput = post_button_row_legend;
+    this.TestOutput = postButtonRowLegend;
   }
 
   showInspectLegend() {
-    this.TestOutput = inspect_button_row_legend;
+    this.TestOutput = inspectButtonRowLegend;
   }
 
   showBackupLegend() {
-    this.TestOutput = backup_button_row_legend;
+    this.TestOutput = backupButtonRowLegend;
   }
 
   showMore() {
@@ -274,7 +279,7 @@ export class ApiComponent implements OnInit {
     this.wantConsumeRow = true;
     this.wantPostRow = true;
     this.wantInspectRow = true;
-    this.wantBackupRow = true;  
+    this.wantBackupRow = true;
   }
 
   showLess() {
@@ -282,7 +287,7 @@ export class ApiComponent implements OnInit {
     this.wantConsumeRow = false;
     this.wantPostRow = false;
     this.wantInspectRow = false;
-    this.wantBackupRow = false;  
+    this.wantBackupRow = false;
   }
 
 }

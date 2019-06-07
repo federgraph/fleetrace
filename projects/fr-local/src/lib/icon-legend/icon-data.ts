@@ -1,5 +1,5 @@
-import { IconNames } from "./icon-names";
-import { IconEnum } from "./icon-enum";
+import { IconNames } from './icon-names';
+import { IconEnum } from './icon-enum';
 
 export enum IconAction {
     Execute,
@@ -34,34 +34,33 @@ export class IconData {
 
     get IconColorString(): string {
         switch (this.Color) {
-            case IconColor.Normal: return "";
-            case IconColor.Primary: return "primary";
-            case IconColor.Accent: return "accent";
-            case IconColor.Warn: return "warn";
-            default: return "primary";
+            case IconColor.Normal: return '';
+            case IconColor.Primary: return 'primary';
+            case IconColor.Accent: return 'accent';
+            case IconColor.Warn: return 'warn';
+            default: return 'primary';
         }
     }
 
     get IconActionString(): string {
         switch (this.Action) {
-            case IconAction.Execute: return "Execute";
-            case IconAction.ReduceTo: return "Reduce To";
-            case IconAction.Show: return "Show";
-            case IconAction.Hide: return "Hide";
-            case IconAction.Toggle: return "Toggle";
-            case IconAction.Increment: return "Increment";
-            case IconAction.Decrement: return "Decrement";
-            case IconAction.Find: return "Find";
-            case IconAction.Display: return "Display";
-            case IconAction.DisplayAndFind: return "Display and Find";
-            default: return "";
+            case IconAction.Execute: return 'Execute';
+            case IconAction.ReduceTo: return 'Reduce To';
+            case IconAction.Show: return 'Show';
+            case IconAction.Hide: return 'Hide';
+            case IconAction.Toggle: return 'Toggle';
+            case IconAction.Increment: return 'Increment';
+            case IconAction.Decrement: return 'Decrement';
+            case IconAction.Find: return 'Find';
+            case IconAction.Display: return 'Display';
+            case IconAction.DisplayAndFind: return 'Display and Find';
+            default: return '';
         }
     }
 
     static readIconData(source: (string | IconEnum | IconColor | IconAction)[][]) {
         const a: IconData[] = [];
-        for (let i = 0; i < source.length; i++) {
-            const cr = source[i];
+        for (const cr of source) {
             const id: IconData = new IconData();
             id.EnumValue = cr[0] as IconEnum;
             id.Meaning = cr[1] as string;
@@ -101,8 +100,7 @@ export const EventNavIcons = [
 ];
 
 export const IconbarIcons = [
-    //extends EventNavIcons
-
+    // extends EventNavIcons
     [IconEnum.minimize, 'Minimize', IconAction.Hide, IconColor.Accent, ''],
     [IconEnum.dashboard, 'Panel', IconAction.Show, IconColor.Normal, ''],
     [IconEnum.camera, 'Icon Legend', IconAction.Toggle, IconColor.Primary, ''],
@@ -130,7 +128,7 @@ export const IconbarIcons = [
 ];
 
 export const ExplorerbarIcons = [
-    //extend EventNavIcons
+    // extend EventNavIcons
     [IconEnum.maximize, 'Maximize', IconAction.Toggle, IconColor.Accent, 'toggleExplorerBar()'],
     [IconEnum.dashboard, 'Panel', IconAction.Show, IconColor.Normal, 'toggleButtonPanel()'],
     [IconEnum.camera, 'Icon Legend', IconAction.Toggle, IconColor.Primary, ''],
@@ -202,7 +200,7 @@ export const EventIcons = [
     [IconEnum.brush, 'fleet color mode, shows fleet assignment', IconAction.Show, IconColor.Accent, 'colorBtnClick(3)'],
     [IconEnum.sort, 'reset to default sort order (debug)', IconAction.Execute, IconColor.Primary, 'sortOrderClear()'],
     [IconEnum.camera, 'toggle legend', IconAction.Toggle, IconColor.Normal, 'toggleLegend()'],
-];    
+];
 
 export const RaceIcons = [
     [IconEnum.delete, 'clear', IconAction.Execute, IconColor.Normal, 'clearRace()'],
@@ -212,7 +210,7 @@ export const RaceIcons = [
     [IconEnum.sort, 'reset sort order', IconAction.Execute, IconColor.Primary, 'sortOrderClear()'],
     [IconEnum.texture, 'layout', IconAction.Toggle, IconColor.Normal, 'toggleLayout()'],
     [IconEnum.camera, 'legend', IconAction.Toggle, IconColor.Normal, 'toggleLegend()'],
-];    
+];
 
 export const EntriesIcons = [
     [IconEnum.delete_outline, 'empty table, delete all rows', IconAction.Execute, IconColor.Normal, 'empty()'],
@@ -223,4 +221,4 @@ export const EntriesIcons = [
     [IconEnum.remove, 'delete last row', IconAction.Toggle, IconColor.Normal, 'popEntry()'],
     [IconEnum.sort, 'reset sort order (debug)', IconAction.Execute, IconColor.Normal, 'sortOrderClear()'],
     [IconEnum.camera, 'legend', IconAction.Toggle, IconColor.Normal, 'toggleLegend()'],
-];    
+];

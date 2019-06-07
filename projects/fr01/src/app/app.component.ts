@@ -20,6 +20,7 @@ import { CurrentNumbers } from 'fleetrace';
 import { BreakpointSet } from './shared/breakpoint-set';
 import { IconData, PreTextIcons, TextAreaIcons } from 'fr-local';
 import { HttpParams } from '@angular/common/http';
+import { ApiComponent } from 'fr-remote';
 
 enum Page {
   None,
@@ -54,7 +55,7 @@ export class AppComponent implements OnInit {
   wantInput = true;
   wantOutput = true;
 
-  lastWebSocketMsg = "LastWebSocketMsg";
+  lastWebSocketMsg = 'LastWebSocketMsg';
 
   autoSaveParamsKey = 'fr03-app-params';
   autoSaveOptionsKey = 'fr03-app-options';
@@ -69,8 +70,8 @@ export class AppComponent implements OnInit {
 
   Throwouts = 0;
 
-  MemoText = "";
-  TestOutput = "";
+  MemoText = '';
+  TestOutput = '';
 
   ShortMode = true;
 
@@ -143,7 +144,7 @@ export class AppComponent implements OnInit {
   break6 = false;
   break9 = false;
   break11 = false;
-  breakText = "";
+  breakText = '';
 
   wantAllInputIcons = false;
 
@@ -163,23 +164,21 @@ export class AppComponent implements OnInit {
   textAreaIcons: IconData[];
   preTextIcons: IconData[];
 
-  constructor(private cdref: ChangeDetectorRef,
-    public BOManager: TBOManager,
-    private breakpointObserver: BreakpointObserver,
-    public snackBar: MatSnackBar) {
+  constructor(private cdref: ChangeDetectorRef, public BOManager: TBOManager,
+              private breakpointObserver: BreakpointObserver, public snackBar: MatSnackBar) {
     this.BOManager.BigButtonRow = false;
     this.BOManager.IsDebug = false;
     this.SL = new TStringList();
     this.Asset = new TEventDataAsset();
     this.updateThrowouts();
     this.BOManager.BO.updateStrictInputMode();
-    this.BOManager.BO.EventProps.EventName = "Event Name";
+    this.BOManager.BO.EventProps.EventName = 'Event Name';
     this.initCurrent();
     this.textAreaIcons = IconData.readIconData(TextAreaIcons);
     this.preTextIcons = IconData.readIconData(PreTextIcons);
   }
 
-  breakpointChanged() {
+  breakpointChanged(state: BreakpointState) {
     this.breakpointSet.test(this.breakpointObserver);
     this.columns = this.breakpointsMap.get(this.breakpointSet.id);
     this.updateBreaks();
@@ -191,49 +190,43 @@ export class AppComponent implements OnInit {
       this.break9 = false;
       this.break11 = false;
       this.wantAllInputIcons = false;
-      this.breakText = "HandsetPortrait";
-    }
-    else if (this.breakpointSet.HandsetLandscape) {
+      this.breakText = 'HandsetPortrait';
+    } else if (this.breakpointSet.HandsetLandscape) {
       this.break6 = false;
       this.break9 = false;
       this.break11 = true;
       this.wantAllInputIcons = false;
-      this.breakText = "HandsetLandscape";
-    }
-    else if (this.breakpointSet.TabletPortrait) {
+      this.breakText = 'HandsetLandscape';
+    } else if (this.breakpointSet.TabletPortrait) {
       this.break6 = false;
       this.break9 = false;
       this.break11 = true;
       this.wantAllInputIcons = true;
-      this.breakText = "TabletPortrait";
-    }
-    else if (this.breakpointSet.TabletLandscape) {
+      this.breakText = 'TabletPortrait';
+    } else if (this.breakpointSet.TabletLandscape) {
       this.break6 = false;
       this.break9 = false;
       this.break11 = false;
       this.wantAllInputIcons = false;
-      this.breakText = "TabletPortrait";
-    }
-    else if (this.breakpointSet.WebPortrait) {
+      this.breakText = 'TabletPortrait';
+    } else if (this.breakpointSet.WebPortrait) {
       this.break6 = false;
       this.break9 = false;
       this.break11 = true;
       this.wantAllInputIcons = true;
-      this.breakText = "WebPortrait";
-    }
-    else if (this.breakpointSet.WebLandscape) {
+      this.breakText = 'WebPortrait';
+    } else if (this.breakpointSet.WebLandscape) {
       this.break6 = false;
       this.break9 = false;
       this.break11 = false;
       this.wantAllInputIcons = true;
-      this.breakText = "WebLandscape";
-    }
-    else {
+      this.breakText = 'WebLandscape';
+    } else {
       this.break6 = this.columns === 6;
       this.break9 = this.columns === 9;
       this.break11 = this.columns === 11;
       this.wantAllInputIcons = this.columns > 9;
-      this.breakText = "BreakpointMap";
+      this.breakText = 'BreakpointMap';
     }
   }
 
@@ -256,21 +249,23 @@ export class AppComponent implements OnInit {
     );
 
     this.breakpointObserver.observe(this.breakpointSet.all()).subscribe(
-      (state: BreakpointState) => { this.breakpointChanged(); }
+      (state: BreakpointState) => { this.breakpointChanged(state); }
     );
   }
 
   autoLoad() {
     const t = localStorage.getItem(this.autoSaveDataKey);
 
-    if (t === undefined) { }
-    else if (t === null) { }
-    else if (t === "") { }
-    else {
-
+    if (t === undefined) {
+      // do nothing
+    } else if (t === null) {
+      // do nothing
+    } else if (t === '') {
+      // do nothing
+    } else {
       const edi = new IEventDataItem();
       edi.EventData = t;
-      edi.EventName = "";
+      edi.EventName = '';
       this.NewEventData = edi;
     }
   }
@@ -416,12 +411,15 @@ export class AppComponent implements OnInit {
     this.LegendVisible = !this.LegendVisible;
     this.TextAreaLegendVisible = false;
     this.PreTextLegendVisible = false;
-    if (this.eventTab && this.EventVisible)
+    if (this.eventTab && this.EventVisible) {
       this.eventTab.LegendVisible = false;
-    if (this.raceTab && this.RaceVisible)
+    }
+    if (this.raceTab && this.RaceVisible) {
       this.raceTab.LegendVisible = false;
-    if (this.entriesTab && this.EntriesVisible)
+    }
+    if (this.entriesTab && this.EntriesVisible) {
       this.entriesTab.LegendVisible = false;
+    }
   }
 
   toggleTextAreaLegend() {
@@ -491,12 +489,15 @@ export class AppComponent implements OnInit {
     this.processQueue(false);
     const temp = this.CurrentRace + delta;
     const rc = this.BOManager.BO.BOParams.RaceCount;
-    if (temp >= 1 && temp <= rc)
+    if (temp >= 1 && temp <= rc) {
       this.CurrentRace = temp;
-    if (temp === 0)
+    }
+    if (temp === 0) {
       this.CurrentRace = rc;
-    if (temp > rc)
+    }
+    if (temp > rc) {
       this.CurrentRace = 1;
+    }
     this.updateFabs();
   }
 
@@ -504,12 +505,15 @@ export class AppComponent implements OnInit {
     this.processQueue(false);
     const temp = this.CurrentTP + delta;
     const itc = this.BOManager.BO.BOParams.ITCount;
-    if (temp >= 0 && temp <= itc)
+    if (temp >= 0 && temp <= itc) {
       this.CurrentTP = temp;
-    if (temp === -1)
+    }
+    if (temp === -1) {
       this.CurrentTP = itc;
-    if (temp > itc)
+    }
+    if (temp > itc) {
       this.CurrentTP = 0;
+    }
     this.updateFabs();
   }
 
@@ -597,7 +601,7 @@ export class AppComponent implements OnInit {
 
   clearBtnClick() {
     const BO = this.BOManager.BO;
-    BO.ClearResult("");
+    BO.ClearResult('');
     BO.StammdatenNode.Collection.ClearList();
     this.showEvent();
     this.showRace();
@@ -611,7 +615,7 @@ export class AppComponent implements OnInit {
     this.markBibAndShow();
   }
 
-  onEntriesTableChanged() {
+  onEntriesTableChanged(event: number) {
     this.showEvent();
     this.showRace();
     this.updateBib();
@@ -623,9 +627,9 @@ export class AppComponent implements OnInit {
   }
 
   onRaceDataAvailable(data: string[]) {
-    for (const s of data)
+    for (const s of data) {
       this.BOManager.BO.Dispatch(s);
-
+    }
     this.calcRace();
     this.calcEvent();
   }
@@ -645,10 +649,11 @@ export class AppComponent implements OnInit {
   }
 
   onParamsChanged(event: EventParams) {
-    if (event.createOption === 0)
+    if (event.createOption === 0) {
       this.createNew(event);
-    else
+    } else {
       this.recreateEvent(event);
+    }
     this.reduceTo(Page.Event);
   }
 
@@ -656,7 +661,7 @@ export class AppComponent implements OnInit {
    * When row with snr was deleted, update all views that depend on StammdatenTabelle.
    * @param event snr that was deleted
    */
-  onEntryDeleted() {
+  onEntryDeleted(event: number) {
     this.showEntries();
     this.showEvent();
     this.showRace();
@@ -674,12 +679,12 @@ export class AppComponent implements OnInit {
 
       if (cr) {
 
-        cr.FN = event.N1 || "";
-        cr.LN = event.N2 || "";
-        cr.SN = event.N3 || "";
-        cr.NC = event.N4 || "";
-        cr.GR = event.N5 || "";
-        cr.PB = event.N6 || "";
+        cr.FN = event.N1 || '';
+        cr.LN = event.N2 || '';
+        cr.SN = event.N3 || '';
+        cr.NC = event.N4 || '';
+        cr.GR = event.N5 || '';
+        cr.PB = event.N6 || '';
 
         this.showEntries();
         this.showEvent();
@@ -690,13 +695,15 @@ export class AppComponent implements OnInit {
   }
 
   updateBib() {
-    if (this.bibTab)
+    if (this.bibTab) {
       this.bibTab.update();
+    }
   }
 
   showEntries() {
-    if (this.EntriesVisible)
+    if (this.EntriesVisible) {
       this.entriesTab.show();
+    }
   }
 
   showRace() {
@@ -707,8 +714,9 @@ export class AppComponent implements OnInit {
   }
 
   calcRace() {
-    if (this.raceTab && this.RaceVisible)
+    if (this.raceTab && this.RaceVisible) {
       this.raceTab.calc();
+    }
   }
 
   showEvent() {
@@ -732,17 +740,19 @@ export class AppComponent implements OnInit {
   }
 
   memoAsset() {
-    if (this.Asset.EventData !== "")
+    if (this.Asset.EventData !== '') {
       this.MemoText = this.Asset.EventData;
-    else
-      this.MemoText = this.info("Asset.EventData is empty");
+    } else {
+      this.MemoText = this.info('Asset.EventData is empty');
+    }
   }
 
   memoConvertedData() {
-    if (this.BOManager.BO.ConvertedData)
+    if (this.BOManager.BO.ConvertedData) {
       this.MemoText = this.BOManager.BO.ConvertedData;
-    else
-      this.MemoText = this.info("BO.ConvertedData is empty");
+    } else {
+      this.MemoText = this.info('BO.ConvertedData is empty');
+    }
   }
 
   memoText(compact: boolean) {
@@ -753,20 +763,21 @@ export class AppComponent implements OnInit {
 
   memoRead() {
     const a = new TEventDataAsset();
-    a.EventName = "Textarea Asset";
+    a.EventName = 'Textarea Asset';
     a.EventData = this.MemoText;
     this.NewEventData = a;
   }
 
   memoClear() {
-    this.MemoText = "";
+    this.MemoText = '';
   }
 
   showConvertedData() {
-    if (this.BOManager.BO.ConvertedData)
+    if (this.BOManager.BO.ConvertedData) {
       this.TestOutput = this.BOManager.BO.ConvertedData;
-    else
-      this.TestOutput = this.info("BO.ConvertData is empty");
+    } else {
+      this.TestOutput = this.info('BO.ConvertData is empty');
+    }
   }
 
   getTxtBackup(compact: boolean) {
@@ -791,14 +802,14 @@ export class AppComponent implements OnInit {
         // if (this.menuTab)
         //   this.TestOutput = this.menuTab.printEventMenu();
         // else
-        //   this.TestOutput = this.info("click on button while event menu is shown");
+        //   this.TestOutput = this.info('click on button while event menu is shown');
         // break;
     }
   }
 
   clearTextOutput() {
     this.SL.Clear();
-    this.TestOutput = "";
+    this.TestOutput = '';
   }
 
   readEmpty() {
@@ -840,14 +851,14 @@ export class AppComponent implements OnInit {
   set NewEventData(value: IEventDataItem) {
     this.resetCurrent();
 
-    //clear Queue, but do not 'update fabs'    
+    // clear Queue, but do not 'update fabs'
     this.BOManager.BO.msgQueueR = [];
     this.BOManager.BO.msgQueueE = [];
 
     // do actual loading
     this.BOManager.LoadNew(value.EventData);
 
-    //save input
+    // save input
     this.Asset = value;
 
     const bo = this.BOManager.BO;
@@ -857,7 +868,7 @@ export class AppComponent implements OnInit {
     this.updateThrowouts();
     this.BOManager.BO.updateStrictInputMode();
 
-    //init Current (try to find it), without updating fabs
+    // init Current (try to find it), without updating fabs
     let rr = new CurrentNumbers();
     rr = bo.findCurrentInRace(rr);
 
@@ -866,19 +877,19 @@ export class AppComponent implements OnInit {
 
     if (re.race === rr.race) {
       this.assignCurrent(rr);
-    }
-    else {
-      if (rr.tp === 0)
+    } else {
+      if (rr.tp === 0) {
         this.assignCurrent(re);
-      else
+      } else {
         this.assignCurrent(rr);
+      }
     }
 
-    //calc
+    // calc
     bo.RNode[this.CurrentRace].Modified = true;
     bo.Calc();
 
-    //show 
+    // show
     if (this.eventTab && this.EventVisible) {
       this.eventTab.initAndShow();
     }
@@ -900,17 +911,17 @@ export class AppComponent implements OnInit {
   }
 
   private info(msg: string): string {
-    return "// " + new Date().toLocaleTimeString() + " - " + msg;
+    return '// ' + new Date().toLocaleTimeString() + ' - ' + msg;
   }
 
   bow(delta: number) {
     let b = this.CurrentBib + delta;
     if (b < 1) {
-      //b = 1;
+      // b = 1;
       b = this.BOManager.BO.EventNode.Collection.Count;
     }
     if (b > this.BOManager.BO.EventNode.Collection.Count) {
-      //b = this.BOManager.BO.EventNode.Collection.Count;
+      // b = this.BOManager.BO.EventNode.Collection.Count;
       b = 1;
     }
     this.CurrentBib = b;
@@ -927,14 +938,11 @@ export class AppComponent implements OnInit {
     const bo = this.BOManager.BO;
     if (!bo) {
       return false;
-    }
-    else if (value >= bo.BOParams.RaceCount) {
+    } else if (value >= bo.BOParams.RaceCount) {
       return false;
-    }
-    else if (value < 0) {
+    } else if (value < 0) {
       return false;
-    }
-    else if (bo.EventProps.Throwouts !== value) {
+    } else if (bo.EventProps.Throwouts !== value) {
       bo.EventProps.Throwouts = value;
       this.updateThrowouts();
       this.calcEvent();
@@ -943,13 +951,15 @@ export class AppComponent implements OnInit {
   }
 
   showFabs() {
-    if (this.timingTab)
+    if (this.timingTab) {
       this.timingTab.show();
+    }
   }
 
   updateFabs() {
-    if (this.timingTab)
+    if (this.timingTab) {
       this.timingTab.update();
+    }
   }
 
   updateEvent() {
@@ -962,11 +972,10 @@ export class AppComponent implements OnInit {
   toggleButtonPanel() {
     this.ButtonPanelVisible = !this.ButtonPanelVisible;
     if (this.ButtonPanelVisible) {
-      this.ShortMode = this.ExplorerBarVisible; //remember
+      this.ShortMode = this.ExplorerBarVisible; // remember
       this.IconBarVisible = false;
       this.ExplorerBarVisible = false;
-    }
-    else {
+    } else {
       this.IconBarVisible = !this.ShortMode;
       this.ExplorerBarVisible = this.ShortMode;
     }
@@ -1025,18 +1034,21 @@ export class AppComponent implements OnInit {
   }
 
   ensureEvent() {
-    if (!this.EventVisible)
+    if (!this.EventVisible) {
       this.EventVisible = true;
+    }
   }
 
   ensureRace() {
-    if (!this.RaceVisible)
+    if (!this.RaceVisible) {
       this.RaceVisible = true;
+    }
   }
 
   ensureBib() {
-    if (!this.BibVisible)
+    if (!this.BibVisible) {
       this.BibVisible = true;
+    }
   }
 
   get timed(): boolean {
@@ -1083,20 +1095,20 @@ export class AppComponent implements OnInit {
 
   createNew(event: EventParams) {
     const ed: IEventDataItem = {
-      EventName: "New Event",
-      EventData: ""
+      EventName: 'New Event',
+      EventData: ''
     };
 
     const sl: string[] = [];
 
-    sl.push("DP.RaceCount=" + event.raceCount);
-    sl.push("DP.ITCount=" + event.itCount);
-    sl.push("DP.StartlistCount=" + event.startlistCount);
+    sl.push('DP.RaceCount=' + event.raceCount);
+    sl.push('DP.ITCount=' + event.itCount);
+    sl.push('DP.StartlistCount=' + event.startlistCount);
 
-    let s = "";
-    for (let i = 0; i < sl.length; i++) {
-      s += sl[i];
-      s += "\r\n";
+    let s = '';
+    for (const t of sl) {
+      s += t;
+      s += '\r\n';
     }
     ed.EventData = s;
 
@@ -1109,9 +1121,9 @@ export class AppComponent implements OnInit {
     this.SL.Clear();
     this.BOManager.BO.BackupToSLCompact(this.SL, false);
 
-    this.SL.SL[2] = "DP.RaceCount=" + event.raceCount;
-    this.SL.SL[3] = "DP.ITCount=" + event.itCount;
-    this.SL.SL[4] = "DP.StartlistCount=" + event.startlistCount;
+    this.SL.SL[2] = 'DP.RaceCount=' + event.raceCount;
+    this.SL.SL[3] = 'DP.ITCount=' + event.itCount;
+    this.SL.SL[4] = 'DP.StartlistCount=' + event.startlistCount;
 
     const a = new IEventDataItem();
     a.EventName = bo.EventProps.EventName;
@@ -1135,10 +1147,12 @@ export class AppComponent implements OnInit {
 
   checkCurrent() {
     const p = this.BOManager.BO.BOParams;
-    if (this.CurrentRace > p.RaceCount)
+    if (this.CurrentRace > p.RaceCount) {
       this.CurrentRace = p.RaceCount;
-    if (this.CurrentTP > p.ITCount)
+    }
+    if (this.CurrentTP > p.ITCount) {
       this.CurrentTP = p.ITCount;
+    }
   }
 
   initCurrent() {
@@ -1154,16 +1168,16 @@ export class AppComponent implements OnInit {
 
     if (re.race === rr.race) {
       this.assignCurrent(rr);
-    }
-    else {
-      if (rr.tp === 0)
-        //for example: event is not timed, finish positions are available but no finish times
-        //current race cannot be advanced if you only look into race
-        //but current race should be advanced if you look into the event, and see that all finish positions have been assigned.
-        //re, determined form looking at event is accurate in this case
+    } else {
+      if (rr.tp === 0) {
+        // for example: event is not timed, finish positions are available but no finish times
+        // current race cannot be advanced if you only look into race
+        // but current race should be advanced if you look into the event, and see that all finish positions have been assigned.
+        // re, determined form looking at event is accurate in this case
         this.assignCurrent(re);
-      else
+      } else {
         this.assignCurrent(rr);
+      }
     }
   }
 
@@ -1173,8 +1187,9 @@ export class AppComponent implements OnInit {
     const r = 1;
 
     let tp = 1;
-    if (bo.EventProps.IsTimed === false || bo.BOParams.ITCount === 0)
+    if (bo.EventProps.IsTimed === false || bo.BOParams.ITCount === 0) {
       tp = 0;
+    }
 
     this.CurrentRace = r;
     this.CurrentTP = tp;
@@ -1184,10 +1199,11 @@ export class AppComponent implements OnInit {
     const bo = this.BOManager.BO;
     let cn = new CurrentNumbers();
 
-    if (bo.BOParams.ITCount > 0)
+    if (bo.BOParams.ITCount > 0) {
       cn = bo.findCurrentInRace(cn);
-    else
+    } else {
       cn = bo.findCurrentInEvent(cn);
+    }
 
     this.assignCurrent(cn);
   }
@@ -1215,7 +1231,7 @@ export class AppComponent implements OnInit {
     }
   }
 
-  sendMsg() {
+  sendMsg(msg: string) {
     // if (this.connBar) {
     //   this.connBar.sendMsg(msg);
     // }
@@ -1226,14 +1242,14 @@ export class AppComponent implements OnInit {
     while (this.BOManager.BO.msgQueueR.length > 0) {
       msg = this.BOManager.BO.msgQueueR.pop();
       this.BOManager.BO.Dispatch(msg);
-      this.sendMsg();
+      this.sendMsg(msg);
     }
 
     while (this.BOManager.BO.msgQueueE.length > 0) {
       msg = this.BOManager.BO.msgQueueE.pop();
-      if (msg !== "" && this.WantUpdateEvent) {
+      if (msg !== '' && this.WantUpdateEvent) {
         this.BOManager.BO.Dispatch(msg);
-        this.sendMsg();
+        this.sendMsg(msg);
       }
     }
 
@@ -1242,12 +1258,12 @@ export class AppComponent implements OnInit {
 
   showQueue() {
     const l = this.BOManager.BO.msgQueueR.concat(this.BOManager.BO.msgQueueE);
-    if (l.length === 0)
-      this.TestOutput = this.info("Queue is empty");
-    else {
+    if (l.length === 0) {
+      this.TestOutput = this.info('Queue is empty');
+    } else {
       const SL = new TStringList();
-      for (let i = 0; i < l.length; i++) {
-        SL.Add(l[i]);
+      for (const t of l) {
+        SL.Add(t);
       }
       this.TestOutput = SL.Text;
     }
@@ -1261,8 +1277,7 @@ export class AppComponent implements OnInit {
     this.lastWebSocketMsg = msg;
     if (msg === 'Manage.Clear') {
       this.clearBtnClick();
-    }
-    else {
+    } else {
       this.BOManager.BO.Dispatch(msg);
       this.calcRace();
       this.calcEvent();
@@ -1277,17 +1292,19 @@ export class AppComponent implements OnInit {
   }
 
   initParams() {
-    //this.initParamsFromQueryString();
-  } 
+    // this.initParamsFromQueryString();
+  }
 
   initParamsFromQueryString() {
     const url = window.location.href;
     if (url.includes('?')) {
       const httpParams = new HttpParams({ fromString: url.split('?')[1] });
-      if (httpParams.get("input") === "true")
+      if (httpParams.get('input') === 'true') {
         this.wantOutput = false;
-      if (httpParams.get("output") === "true")
+      }
+      if (httpParams.get('output') === 'true') {
         this.wantInput = false;
+      }
     }
   }
 
@@ -1296,12 +1313,10 @@ export class AppComponent implements OnInit {
       this.calcRace();
       this.calcEvent();
       this.updateFabs();
-    }
-    else if (calc && this.eventTab && this.EventVisible) {
+    } else if (calc && this.eventTab && this.EventVisible) {
       this.calcEvent();
       this.updateFabs();
-    }
-    else {
+    } else {
       this.BOManager.BO.RNode[this.CurrentRace].Modified = true;
       this.BOManager.BO.Calc();
     }
@@ -1317,7 +1332,7 @@ export class AppComponent implements OnInit {
     this.updateAll();
   }
 
-  handleCalc() {
+  handleCalc(value: number) {
     this.calcRace();
     this.calcEvent();
   }

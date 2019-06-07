@@ -1,12 +1,11 @@
-import { TEntry } from "./scoring-entry";
+import { TEntry } from './scoring-entry';
 
-export class TEntryList extends Array<TEntry>
-{
+export class TEntryList extends Array<TEntry> {
 
     constructor() {
         super();
-        //if (environment.wantES5)
-            Object.setPrototypeOf(this, TEntryList.prototype);              
+        // if (environment.wantES5)
+        Object.setPrototypeOf(this, TEntryList.prototype);
     }
 
     Clear() {
@@ -20,7 +19,7 @@ export class TEntryList extends Array<TEntry>
     Contains(e: TEntry) {
         return this.includes(e);
     }
-    
+
     get Count(): number { return this.length; }
 
     getDuplicateIDs(): TEntryList {
@@ -34,8 +33,9 @@ export class TEntryList extends Array<TEntry>
 
             if (laste != null) {
                 if (lastid === id) {
-                    if (!dupList.includes(laste))
+                    if (!dupList.includes(laste)) {
                         dupList.push(laste);
+                    }
                     dupList.push(e);
                 }
             }
@@ -69,14 +69,17 @@ export class TEntryList extends Array<TEntry>
     }
 
     compareSailID(left: TEntry, right: TEntry): number {
-        if (left == null && right == null)
+        if (left == null && right == null) {
             return 0;
-        if (left == null)
+        }
+        if (left == null) {
             return - 1;
-        if (right == null)
+        }
+        if (right == null) {
             return 1;
+        }
         return left.CompareSailID(right.SailID);
     }
-    
+
 }
 

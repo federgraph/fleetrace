@@ -4,15 +4,16 @@ export class TEnumSet extends Array<boolean> {
 
     constructor(highestIndex: number) {
         super();
-        //if (environment.wantES5)
+        // if (environment.wantES5)
         Object.setPrototypeOf(this, TEnumSet.prototype);
         this.Count = highestIndex + 1;
     }
-    
+
     init(): void {
         this.length = this.Count;
-        for (let i = 0; i < this.Count; i++)
+        for (let i = 0; i < this.Count; i++) {
             this[i] = false;
+        }
     }
 
     Clear(): void {
@@ -29,31 +30,37 @@ export class TEnumSet extends Array<boolean> {
     }
 
     IsMember(index: number): boolean {
-        if (index > -1 && index < this.Count && index < this.length)
+        if (index > -1 && index < this.Count && index < this.length) {
             return this[index];
+        }
         return false;
     }
 
     get IsEmpty(): boolean {
-        for (let i = 0; i < this.length; i++) {
-            if (this[i]) return false;
+        for (const b of this) {
+            if (b) {
+                return false;
+            }
         }
         return true;
     }
 
     Include(index: number): void {
-        if (this.IsValidIndex)
+        if (this.IsValidIndex) {
             this[index] = true;
+        }
     }
 
     Exclude(index: number): void {
-        if (this.IsValidIndex)
+        if (this.IsValidIndex) {
             this[index] = false;
+        }
     }
 
     IsValidIndex(index: number): boolean {
-        if (index > -1 && index < this.Count && index < this.length)
+        if (index > -1 && index < this.Count && index < this.length) {
             return true;
+        }
         return false;
     }
 

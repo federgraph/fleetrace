@@ -1,5 +1,4 @@
-<h2>Input <span id="input-name-label">( R{{CurrentRace}} - IT{{CurrentTP}} - Bib
-        {{CurrentBib}} )</span></h2>
+<h2>Input <span id="input-name-label">( R{{CurrentRace}} - IT{{CurrentTP}} - Bib{{CurrentBib}} )</span></h2>
 
 <div *ngIf="CheckBarVisible" class="checkbox-button-row">
     <mat-checkbox class="checkbox" [(ngModel)]="Auto">Auto</mat-checkbox>
@@ -17,12 +16,10 @@
 </div>
 
 <div class="timing-button-row">
-    <!-- <button mat-fab disabled=true>{{countShown}}</button> -->
-<ng-container *ngFor="let bt of BowTupples">
-    <button *ngIf="bt[1]" mat-fab color="accent" (click)=clickBow(bt[0])>{{bt[0]}}</button>
-    <button *ngIf="!bt[1]" mat-fab color="primary" (click)=clickBiw(bt[0])>{{bt[0]}}</button>
-</ng-container>
-    <!-- <button *ngFor="let bow of Bows" mat-fab (click)=clickBow(bow)>{{bow}}</button> -->
+    <ng-container *ngFor="let bt of BowTupples">
+        <button *ngIf="bt[1]" mat-fab color="accent" (click)=clickBow(bt[0])>{{bt[0]}}</button>
+        <button *ngIf="!bt[1]" mat-fab color="primary" (click)=clickBiw(bt[0])>{{bt[0]}}</button>
+    </ng-container>
 </div>
 
 <div class="button-row">

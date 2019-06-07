@@ -9,13 +9,13 @@ import { TBOManager } from 'fleetrace';
 })
 export class IconBarLegendComponent implements OnInit {
 
-  @Input() caption: string = "";
+  @Input() caption: string = '';
   @Input() bar: IconData[] = [];
 
   constructor(public BOManager: TBOManager) { }
 
   ngOnInit() {
-    
+
   }
 
 }
