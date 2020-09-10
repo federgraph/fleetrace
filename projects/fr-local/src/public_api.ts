@@ -29,3 +29,5 @@ export * from './lib/result-hash/result-hash.component';
 
 export * from './lib/timing-buttons/timing-buttons.component';
 export * from './lib/timing-widget/timing-widget.component';
+
+export * from './lib/json-info/json-info.component';

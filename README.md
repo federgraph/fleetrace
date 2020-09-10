@@ -6,7 +6,7 @@ This is an Angular/Typescript workspace using library projects.
 
 ## How to build
 
-#### Install the prerequisits
+#### Install the prerequisites
 
 I guess on a fresh Windows machine you would want to install in this order:
 
@@ -21,7 +21,7 @@ Install *Visual Studio Code* before you install *git* so **Code** can be selecte
 #### Get the code
 
 * Clone the repository
-* Run yarn from the console.
+* Run yarn from the console, or npm install.
 
 #### build the project libraries first
 
